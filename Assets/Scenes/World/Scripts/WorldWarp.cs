@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClassroomWarp : WarpController
+public class WorldWarp : WarpController
 {
-    public int topic;
-
+    // Start is called before the first frame update
     void Start()
     {
-        sceneName = "Classroom";
+        sceneName = "World";
     }
 
     public override void SetParams()
     {
-        ClassroomData.topic = topic;
+        // tada
     }
 
     public override bool ValidateWarp()

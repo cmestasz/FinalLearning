@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class ClassroomData
 {
-    public static string topic;
+    public static int topic;
 }

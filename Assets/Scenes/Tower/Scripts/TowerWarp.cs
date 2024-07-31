@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class TowerWarp : WarpController
 {
-    private enum WarpType { Up, Down, Inside };
-    [SerializeField] private string course;
+    public enum WarpType { Up, Down, FromOutside, FromInside };
+    [SerializeField] private int course;
     [SerializeField] private int floor;
     private int floorDest;
+    private int courseDest;
+    private WarpType cameFrom;
     [SerializeField] private WarpType warpType;
     void Start()
     {
         sceneName = "Tower";
+        courseDest = TowerData.course;
     }
 
     public override void SetParams()
     {
-        TowerData.course = course;
+        TowerData.course = courseDest;
         TowerData.floor = floorDest;
-        
+        TowerData.cameFrom = cameFrom;
     }
 
     public override bool ValidateWarp()
@@ -34,17 +37,23 @@ public class TowerWarp : WarpController
                 floorDest = TowerData.floor + 1;
                 break;
             case WarpType.Down:
-                if (TowerData.floor <= 1)
+                if (TowerData.floor <= 0)
                 {
                     Debug.Log("No way down");
                     return false;
                 }
                 floorDest = TowerData.floor - 1;
                 break;
-            case WarpType.Inside:
+            case WarpType.FromOutside:
                 floorDest = floor;
+                courseDest = course;
+                break;
+            case WarpType.FromInside:
+                floorDest = TowerData.floor;
+                courseDest = TowerData.course;
                 break;
         }
+        cameFrom = warpType;
         return true;
     }
 }
