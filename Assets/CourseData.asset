@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554e06afcedfb514fad30e99c908ab5e, type: 3}
+  m_Name: CourseData
+  m_EditorClassIdentifier: 
+  courses:
+  - id: FP1
+    name: "Fundamentos de la Programaci\xF3n 1"
+    topics:
+    - name: "Introducci\xF3n a la Programaci\xF3n"
+      description: "Conceptos b\xE1sicos de programaci\xF3n."
+    - name: Variables y Tipos de Datos
+      description: Uso de variables y tipos de datos fundamentales.
+    - name: Operadores y Expresiones
+      description: "Operaciones b\xE1sicas en programaci\xF3n."
+    - name: Estructuras de Control
+      description: Flujo de control en programas.
+    - name: Funciones
+      description: "Creaci\xF3n y uso de funciones."
+  - id: FP2
+    name: "Fundamentos de la Programaci\xF3n 2"
+    topics:
+    - name: Arreglos
+      description: Manejo de colecciones de datos.
+    - name: Cadenas de Caracteres
+      description: "Manipulaci\xF3n de texto en programaci\xF3n."
+    - name: Estructuras de Datos
+      description: "Implementaci\xF3n de estructuras de datos b\xE1sicas."
+    - name: "Algoritmos de B\xFAsqueda y Ordenaci\xF3n"
+      description: "T\xE9cnicas fundamentales de b\xFAsqueda y ordenaci\xF3n."
+    - name: "Programaci\xF3n Orientada a Objetos"
+      description: "Introducci\xF3n a la POO."
+  - id: EDA
+    name: Estructuras de Datos y Algoritmos
+    topics:
+    - name: "An\xE1lisis de Algoritmos"
+      description: "Evaluaci\xF3n de eficiencia algor\xEDtmica."
+    - name: Estructuras de Datos Avanzadas
+      description: "Implementaci\xF3n de estructuras complejas."
+    - name: Algoritmos de Grafos
+      description: Manejo de grafos y sus algoritmos.
+    - name: "T\xE9cnicas de Dise\xF1o de Algoritmos"
+      description: "Estrategias para dise\xF1ar algoritmos eficientes."
+    - name: Algoritmos de Ordenamiento Avanzados
+      description: "M\xE9todos eficientes de ordenamiento."
+  - id: PW1
+    name: "Programaci\xF3n Web 1"
+    topics:
+    - name: HTML y CSS
+      description: Fundamentos de estructura y estilo web.
+    - name: "JavaScript B\xE1sico"
+      description: "Introducci\xF3n a la programaci\xF3n del lado del cliente."
+    - name: Responsive Design
+      description: "Dise\xF1o adaptable a diferentes dispositivos."
+    - name: Frameworks CSS
+      description: "Uso de frameworks para dise\xF1o web."
+    - name: "Introducci\xF3n a Backend"
+      description: "Conceptos b\xE1sicos de programaci\xF3n del lado del servidor."
+  - id: PW2
+    name: "Programaci\xF3n Web 2"
+    topics:
+    - name: JavaScript Avanzado
+      description: "T\xE9cnicas avanzadas de programaci\xF3n en JS."
+    - name: Frameworks Frontend
+      description: Uso de frameworks modernos para frontend.
+    - name: Bases de Datos Web
+      description: "Integraci\xF3n de bases de datos en aplicaciones web."
+    - name: APIs y Servicios Web
+      description: Desarrollo y consumo de APIs.
+    - name: Seguridad Web
+      description: "Pr\xE1cticas de seguridad en desarrollo web."

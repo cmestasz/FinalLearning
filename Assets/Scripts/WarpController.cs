@@ -2,23 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarpController : MonoBehaviour
+public abstract class WarpController : MonoBehaviour
 {
-    [SerializeField] private string sceneName;
-    // Start is called before the first frame update
-    void Start()
-    {
+    protected string sceneName;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    public abstract void SetParams();
+    public abstract bool ValidateWarp();
     public void Warp()
     {
-        SceneChanger.ChangeScene(sceneName);
+        if (ValidateWarp())
+        {
+            SetParams();
+            StartCoroutine(SceneChanger.ChangeScene(sceneName));
+        }
     }
 }

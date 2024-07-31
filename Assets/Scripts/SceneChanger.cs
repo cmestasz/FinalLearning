@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public static class SceneChanger
 {
-    public static void ChangeScene(string sceneName)
+    private static GameObject fade;
+    public static IEnumerator ChangeScene(string scene)
     {
-       SceneManager.LoadScene(sceneName);
+        fade = GameObject.Find("Fade");
+        fade.GetComponent<Animator>().SetTrigger("Fading");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(scene);
     }
 }
