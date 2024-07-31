@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Tilemap interactables;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
