@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public const float MOVE_SPEED = 2.5f;
+    public const float MOVE_SPEED = 1.5f;
+    private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -31,6 +32,6 @@ public class PlayerController : MonoBehaviour
         {
             dir = Vector2.right;
         }
-        transform.Translate(MOVE_SPEED * Time.deltaTime * dir);
+        rb.MovePosition((Vector2)transform.position + MOVE_SPEED * Time.deltaTime * dir);
     }
 }
