@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
+    [SerializeField] private Animator interactText;
+    private IKeyInteractable interactable;
     private Rigidbody2D rb;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,14 +34,41 @@ public class PlayerController : MonoBehaviour
             dir = Vector2.right;
         }
         rb.MovePosition((Vector2)transform.position + moveSpeed * dir);
+    
+        if (Input.GetMouseButton(0) && interactable != null)
+        {
+            StartCoroutine(interactable.Interact());
+            interactText.SetBool("CanInteract", false);
+            interactable = null;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        WarpController warp = other.GetComponent<WarpController>();
-        if (warp != null)
+        if (other.CompareTag("Warp"))
         {
-            warp.Warp();
+            WarpController warp = other.GetComponent<WarpController>();
+            if (warp != null)
+            {
+                warp.Warp();
+            }
+        } else if (other.CompareTag("KeyInteractable"))
+        {
+            IKeyInteractable interactable = other.GetComponent<IKeyInteractable>();
+            if (interactable != null)
+            {
+                interactText.SetBool("CanInteract", true);
+                this.interactable = interactable;
+            }
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("KeyInteractable"))
+        {
+            interactText.SetBool("CanInteract", false);
+            interactable = null;
         }
     }
 }

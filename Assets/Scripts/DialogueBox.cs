@@ -7,40 +7,26 @@ using TMPro;
 public class DialogueBox : MonoBehaviour
 {
     public bool writing;
-    public static DialogueBox instance;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private Animator clickImage;
-    [SerializeField] private bool singleton;
     [SerializeField] private float writeDelay;
     private bool firstAnim = true;
     
 
     void Start()
     {
-        GameObject parent = transform.parent.gameObject;
-        if (singleton)
-        {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(parent);
-            }
-            else
-            {
-                Destroy(parent);
-            }
-        }
     }
 
     public void WriteDialogue(string dialogue)
     {
+        gameObject.SetActive(true);
         StartCoroutine(Write(dialogue));
     }
 
     public void ClearDialogue()
     {
         dialogueText.text = "";
-        clickImage.SetTrigger("FadeOut");
+        clickImage.SetBool("IsVisible", false);
     }
 
     public void CloseDialogue()
@@ -55,7 +41,6 @@ public class DialogueBox : MonoBehaviour
             firstAnim = false;
         else
             ClearDialogue();
-        gameObject.SetActive(true);
         writing = true;
         foreach (char letter in dialogue)
         {
@@ -63,7 +48,7 @@ public class DialogueBox : MonoBehaviour
             yield return new WaitForSeconds(writeDelay);
         }
         writing = false;
-        clickImage.SetTrigger("FadeIn");
+        clickImage.SetBool("IsVisible", true);
     }
 
     public bool CanWrite()
