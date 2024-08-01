@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BannerIn
+  m_Name: BannerOut
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -53,22 +53,22 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 335
-        inSlope: -277.19345
-        outSlope: -277.19345
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.024623811
-        outWeight: 0.03638063
-      - serializedVersion: 3
-        time: 1
         value: 234.99998
-        inSlope: 10.476522
-        outSlope: 10.476522
+        inSlope: -9.583994
+        outSlope: -9.583994
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.16101182
-        outWeight: 0.33333334
+        outWeight: 0.07964698
+      - serializedVersion: 3
+        time: 1
+        value: 335
+        inSlope: 292.794
+        outSlope: 292.794
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.049320042
+        outWeight: 0.041620824
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -161,22 +161,22 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 335
-        inSlope: -277.19345
-        outSlope: -277.19345
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.024623811
-        outWeight: 0.03638063
-      - serializedVersion: 3
-        time: 1
         value: 234.99998
-        inSlope: 10.476522
-        outSlope: 10.476522
+        inSlope: -9.583994
+        outSlope: -9.583994
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.16101182
-        outWeight: 0.33333334
+        outWeight: 0.07964698
+      - serializedVersion: 3
+        time: 1
+        value: 335
+        inSlope: 292.794
+        outSlope: 292.794
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.049320042
+        outWeight: 0.041620824
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

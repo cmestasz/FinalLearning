@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator interactText;
     private IKeyInteractable interactable;
     private Rigidbody2D rb;
+    public bool canMove = true;
     
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour
         {
             dir = Vector2.right;
         }
-        rb.MovePosition((Vector2)transform.position + moveSpeed * dir);
+        if (canMove)
+            rb.MovePosition((Vector2)transform.position + moveSpeed * dir);
     
         if (Input.GetMouseButton(0) && interactable != null)
         {

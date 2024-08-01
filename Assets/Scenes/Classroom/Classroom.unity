@@ -226,7 +226,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6370c7ec22048694caffe0118d4d887e, type: 3}
   - {fileID: 21300000, guid: 5ff26ef5599bbf24f972be1ebc3b0476, type: 3}
   - {fileID: 21300000, guid: 5af7c668d40994742b7730edb81a9e36, type: 3}
+  teacherNames:
+  - Juan
+  - Marcos
+  - Luque
+  - Christian
+  - Jorge
   dialogueBox: {fileID: 1110125638}
+  classroomManager: {fileID: 844911255}
 --- !u!61 &50905548
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3897,6 +3904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraDelay: 5
   player: {fileID: 1465826153}
+  isFollowingPlayer: 1
 --- !u!81 &410389513
 AudioListener:
   m_ObjectHideFlags: 0
@@ -27959,7 +27967,7 @@ Transform:
   m_GameObject: {fileID: 844911253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47869372, y: -14.68496, z: -10.022174}
+  m_LocalPosition: {x: 0.08, y: -11.96, z: -10.022174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27977,8 +27985,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206eb07ccfb2aad47b38d09f35a9a69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1465826151}
+  mainCamera: {fileID: 410389514}
+  topicBanner: {fileID: 884049653}
   courseText: {fileID: 491069575}
   topicText: {fileID: 1170042144}
+  classCenter: {x: 0, y: -12, z: -10}
+  cameraSpeed: 12.5
+  zoomSpeed: 5.5
 --- !u!1 &884049649
 GameObject:
   m_ObjectHideFlags: 0
@@ -28399,7 +28413,7 @@ MonoBehaviour:
   writing: 0
   dialogueText: {fileID: 936013438}
   clickImage: {fileID: 730831399}
-  writeDelay: 0.01
+  writeDelay: 0.015
 --- !u!114 &1110125639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28675,6 +28689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.1
   interactText: {fileID: 109446715}
+  canMove: 1
 --- !u!212 &1465826152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -29743,11 +29758,11 @@ BoxCollider2D:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 964024068}
   - {fileID: 410389515}
+  - {fileID: 964024068}
   - {fileID: 448334303}
   - {fileID: 1465826153}
   - {fileID: 940235152}
-  - {fileID: 844911254}
   - {fileID: 1754094012}
   - {fileID: 50905546}
+  - {fileID: 844911254}

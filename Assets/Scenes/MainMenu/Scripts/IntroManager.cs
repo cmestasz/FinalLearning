@@ -36,7 +36,7 @@ public class IntroManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         foreach (string dialogue in dialogues)
         {
-            dialogueBox.WriteDialogue(dialogue);
+            dialogueBox.WriteDialogue("...", dialogue);
             yield return new WaitUntil(dialogueBox.CanWrite);
         }
 

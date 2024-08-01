@@ -11,16 +11,16 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] private Animator clickImage;
     [SerializeField] private float writeDelay;
     private bool firstAnim = true;
-    
+
 
     void Start()
     {
     }
 
-    public void WriteDialogue(string dialogue)
+    public void WriteDialogue(string talker, string dialogue)
     {
         gameObject.SetActive(true);
-        StartCoroutine(Write(dialogue));
+        StartCoroutine(Write("<b>" + talker + "</b>\n" + dialogue));
     }
 
     public void ClearDialogue()
@@ -45,7 +45,10 @@ public class DialogueBox : MonoBehaviour
         foreach (char letter in dialogue)
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(writeDelay);
+            float delay = writeDelay;
+            if (letter == '\n')
+                delay *= 4;
+            yield return new WaitForSeconds(delay);
         }
         writing = false;
         clickImage.SetBool("IsVisible", true);
@@ -54,5 +57,10 @@ public class DialogueBox : MonoBehaviour
     public bool CanWrite()
     {
         return !writing && Input.GetMouseButton(0);
+    }
+
+    public bool CanConsecutiveWrite()
+    {
+        return !writing;
     }
 }
