@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TowerManager : MonoBehaviour
@@ -10,13 +11,15 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Transform outsideWarp;
     [SerializeField] private Transform upWarp;
     [SerializeField] private Transform downWarp;
+    [SerializeField] private TMP_Text courseText;
+    [SerializeField] private TMP_Text floorText;
     private const int CLASSROOMS_PER_FLOOR = 4;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(TowerData.floor);
-        Debug.Log(GlobalStorage.CourseData.courses[TowerData.course].name);
+        courseText.text = GlobalStorage.CourseData.courses[TowerData.course].name;
+        floorText.text = "Piso " + (TowerData.floor + 1);
         Vector2 pos = Vector2.zero;
 
         foreach (ClassroomWarp clsw in classroomWarps)
