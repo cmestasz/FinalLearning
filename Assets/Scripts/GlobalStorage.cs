@@ -11,4 +11,28 @@ public class GlobalStorage : MonoBehaviour
     {
         CourseData = courseData;
     }
+
+    public static string GetCourse()
+    {
+        try
+        {
+            return CourseData.courses[TowerData.course].name;
+        }
+        catch
+        {
+            return "curso por defecto";
+        }
+    }
+
+    public static string GetTopic()
+    {
+        try
+        {
+            return CourseData.courses[TowerData.course].topics[ClassroomData.topic].name;
+        }
+        catch
+        {
+            return "tema por defecto";
+        }
+    }
 }

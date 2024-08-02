@@ -18,7 +18,7 @@ public class TowerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        courseText.text = GlobalStorage.CourseData.courses[TowerData.course].name;
+        courseText.text = GlobalStorage.GetCourse();
         floorText.text = "Piso " + (TowerData.floor + 1);
         Vector2 pos = Vector2.zero;
 

@@ -11,10 +11,9 @@ public class TeacherController : MonoBehaviour, IKeyInteractable
 
     public IEnumerator Interact()
     {
-        string topic = GlobalStorage.CourseData.courses[TowerData.course].topics[ClassroomData.topic].name;
-        // string topic = "tema";
+        string topic = GlobalStorage.GetTopic();
 
-        string dialogue = string.Join(
+        string dialogueStart = string.Join(
             "\n",
             new string[] {
                 $"{teacherName}:Hola! Listo para tu clase de {topic}!",
@@ -23,14 +22,28 @@ public class TeacherController : MonoBehaviour, IKeyInteractable
                 "<<wait 0.25",
                 $"{teacherName}:No estaba preguntando!",
                 "<<wait 0.25",
+                "<<endforce"
+            }
+        );
+
+        string dialogeEnd = string.Join(
+            "\n",
+            new string[] {
+                $"{teacherName}:No hay reembolsos!",
                 "<<end"
             }
         );
 
-        yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogue);
 
-
-        classroomManager.StartClass();
+        if (!classroomManager.classDone)
+        {
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueStart);
+            classroomManager.StartClass();
+        }
+        else
+        {
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogeEnd);
+        }
     }
 
     // Start is called before the first frame update

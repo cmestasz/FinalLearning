@@ -37,11 +37,11 @@ public class DialogueBox : MonoBehaviour
 
     private IEnumerator Write(string dialogue)
     {
+        writing = true;
         if (firstAnim)
             firstAnim = false;
         else
             ClearDialogue();
-        writing = true;
         foreach (char letter in dialogue)
         {
             dialogueText.text += letter;

@@ -31,8 +31,13 @@ public static class DialogueBuilder
                 yield return new WaitUntil(dialogueBox.CanConsecutiveWrite);
                 yield return new WaitForSeconds(waitTime);
             }
-            else if (line.StartsWith("<<end"))
+            else if (line.StartsWith("<<endforce"))
             {
+                dialogueBox.CloseDialogue();
+            }
+            else if (line.StartsWith("<<end")) 
+            {
+                yield return new WaitUntil(dialogueBox.CanWrite);
                 dialogueBox.CloseDialogue();
             }
             else
