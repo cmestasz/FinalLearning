@@ -1,9 +1,7 @@
-
 using System.Collections.Generic;
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "CourseData", menuName = "ScriptableObjects/CourseData", order = 1)]
-public class CourseDataSO : ScriptableObject
+[System.Serializable]
+public class CourseData
 {
   public List<Course> courses;
 }
@@ -21,4 +19,10 @@ public class Topic
 {
   public string name;
   public string description;
+
+  public Topic()
+  {
+    name = "Tema por defecto";
+    description = "Descripción por defecto";
+  }
 }

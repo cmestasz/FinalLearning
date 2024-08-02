@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalStorage : MonoBehaviour
 {
-    public static CourseDataSO CourseData;
-    public CourseDataSO courseData;
+    public static CourseData CourseData;
 
     void Awake()
     {
-        CourseData = courseData;
+        CourseData = JsonUtility.FromJson<CourseData>(Resources.Load<TextAsset>("CourseData").text);
     }
 
     public static string GetCourse()
@@ -24,15 +21,15 @@ public class GlobalStorage : MonoBehaviour
         }
     }
 
-    public static string GetTopic()
+    public static Topic GetTopic()
     {
         try
         {
-            return CourseData.courses[TowerData.course].topics[ClassroomData.topic].name;
+            return CourseData.courses[TowerData.course].topics[ClassroomData.topic];
         }
         catch
         {
-            return "tema por defecto";
+            return new Topic();
         }
     }
 }

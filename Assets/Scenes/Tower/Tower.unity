@@ -11540,8 +11540,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   writing: 0
   dialogueText: {fileID: 226290993}
+  inputText: {fileID: 0}
   clickImage: {fileID: 1671769296}
   writeDelay: 0.01
+  player: {fileID: 0}
+  inputList: []
 --- !u!114 &902188354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39033,12 +39036,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 86457d5087f30dd4198f0246cd855dae, type: 3}
   - {fileID: 21300000, guid: 3693189088e190047be5600901aa3970, type: 3}
   - {fileID: 21300000, guid: 579f9a034f2856446a5bd523b56b1f77, type: 3}
-  personNames:
-  - A
-  - B
-  - C
-  - D
-  - E
+  names:
+  - Amadeo
+  - Bonifaz
+  - Circano
+  - Dorimeo
+  - Elifasio
   dialogueBox: {fileID: 902188353}
 --- !u!61 &1139368628
 BoxCollider2D:

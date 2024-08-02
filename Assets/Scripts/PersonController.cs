@@ -1,16 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class PersonController : MonoBehaviour, IKeyInteractable
+public class PersonController : AnyCharacterController, IKeyInteractable
 {
-    [SerializeField] private Sprite[] sprites;
-    [SerializeField] private string[] personNames;
-    private string personName;
     [SerializeField] private DialogueBox dialogueBox;
 
     public IEnumerator Interact()
     {
-        string dialogue = PersonDialogues.GetRandomDialogue(personName);
+        string dialogue = PersonDialogues.GetRandomDialogue(characterName);
 
         yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogue);
     }
@@ -18,8 +15,7 @@ public class PersonController : MonoBehaviour, IKeyInteractable
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
-        personName = personNames[Random.Range(0, personNames.Length)];
+        ChooseNameSprite();
     }
 
     // Update is called once per frame

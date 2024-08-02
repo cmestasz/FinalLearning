@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class PersonDialogues
@@ -8,9 +6,7 @@ public static class PersonDialogues
         new string[] {
             "/name/:Por qué todas las torres se ven iguales?",
             "<<click",
-            "/name/:Es que no hay variedad en la arquitectura?",
-            "<<click",
-            "SISTEMA:No, es que todas las torres son la misma torre.",
+            "SISTEMA:Todas las torres son la misma torre.",
             "<<click",
             "<<end"
         },

@@ -1,17 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-/*
-Format:
-
-talker:dialogue
-<<click
-<<wait 0.25
-<<end
-*/
-
 
 public static class DialogueBuilder
 {

@@ -1,0 +1,114 @@
+{
+  "courses": [
+    {
+      "id": "FP1",
+      "name": "Fundamentos de la Programación 1",
+      "topics": [
+        { "name": "Introducción", "description": "Conceptos básicos de programación y lógica computacional." },
+        { "name": "Variables", "description": "Tipos de datos y declaración de variables." },
+        { "name": "Operadores", "description": "Uso de operadores aritméticos y lógicos." },
+        { "name": "Condicionales", "description": "Estructuras de control if, else y switch." },
+        { "name": "Bucles", "description": "Estructuras de control for, while y do-while." },
+        { "name": "Funciones", "description": "Creación y uso de funciones y procedimientos." },
+        { "name": "Parámetros", "description": "Paso de parámetros y argumentos a funciones." },
+        { "name": "Alcance", "description": "Alcance de variables locales y globales." },
+        { "name": "Arreglos", "description": "Introducción a los arreglos unidimensionales." },
+        { "name": "Cadenas", "description": "Manipulación de cadenas de texto." },
+        { "name": "Modularidad", "description": "Introducción a la programación modular." },
+        { "name": "Debugging", "description": "Técnicas básicas de depuración y manejo de errores." },
+        { "name": "I/O", "description": "Entrada y salida de datos." },
+        { "name": "Estructuras", "description": "Introducción a los tipos de datos estructurados." },
+        { "name": "Archivos", "description": "Lectura y escritura básica de archivos de texto." },
+        { "name": "Buenas prácticas", "description": "Estilo de código y buenas prácticas de programación." }
+      ]
+    },
+    {
+      "id": "FP2",
+      "name": "Fundamentos de la Programación 2",
+      "topics": [
+        { "name": "Repaso", "description": "Revisión de conceptos fundamentales de programación." },
+        { "name": "Matrices", "description": "Manejo de arreglos multidimensionales." },
+        { "name": "Algoritmos de arreglos", "description": "Técnicas de ordenamiento y búsqueda en arreglos." },
+        { "name": "Recursividad", "description": "Conceptos y aplicaciones de funciones recursivas." },
+        { "name": "Punteros", "description": "Uso de punteros y referencias en programación." },
+        { "name": "Estructuras", "description": "Definición y uso de estructuras y registros." },
+        { "name": "Memoria dinámica", "description": "Gestión dinámica de memoria." },
+        { "name": "Intro POO", "description": "Introducción a la programación orientada a objetos." },
+        { "name": "Clases y objetos", "description": "Creación y uso de clases y objetos." },
+        { "name": "Encapsulamiento", "description": "Encapsulamiento y métodos de acceso en POO." },
+        { "name": "Herencia", "description": "Concepto y aplicación de herencia en POO." },
+        { "name": "Polimorfismo", "description": "Implementación de polimorfismo en POO." },
+        { "name": "Abstracción", "description": "Interfaces y clases abstractas." },
+        { "name": "Excepciones", "description": "Manejo de excepciones en programación." },
+        { "name": "Colecciones", "description": "Introducción a las colecciones (listas, pilas, colas)." },
+        { "name": "Archivos avanzados", "description": "Manejo de archivos binarios y serialización de objetos." }
+      ]
+    },
+    {
+      "id": "EDA",
+      "name": "Estructuras de Datos y Algoritmos",
+      "topics": [
+        { "name": "Introducción", "description": "Conceptos básicos de estructuras de datos y complejidad algorítmica." },
+        { "name": "Análisis de algoritmos", "description": "Notación Big O y análisis de eficiencia algorítmica." },
+        { "name": "Listas enlazadas", "description": "Implementación y operaciones en listas enlazadas simples y dobles." },
+        { "name": "Pilas", "description": "Estructura, implementación y aplicaciones de pilas." },
+        { "name": "Colas", "description": "Implementación de colas y colas de prioridad." },
+        { "name": "Árboles binarios", "description": "Conceptos y operaciones en árboles binarios y de búsqueda." },
+        { "name": "Árboles balanceados", "description": "Implementación de árboles AVL y Rojo-Negro." },
+        { "name": "Grafos", "description": "Representación y algoritmos de recorrido en grafos." },
+        { "name": "Ordenamiento básico", "description": "Algoritmos de ordenamiento burbuja, selección e inserción." },
+        { "name": "Ordenamiento avanzado", "description": "Implementación de quicksort, mergesort y heapsort." },
+        { "name": "Búsqueda", "description": "Algoritmos de búsqueda lineal, binaria y hashing." },
+        { "name": "Tablas hash", "description": "Implementación de tablas hash y manejo de colisiones." },
+        { "name": "Montículos", "description": "Estructura y aplicaciones de montículos y colas de prioridad." },
+        { "name": "Algoritmos voraces", "description": "Diseño y aplicación de algoritmos voraces (greedy)." },
+        { "name": "Programación dinámica", "description": "Conceptos y aplicaciones de programación dinámica." },
+        { "name": "Algoritmos de grafos", "description": "Implementación de algoritmos de Dijkstra, Kruskal y Prim." }
+      ]
+    },
+    {
+      "id": "PW1",
+      "name": "Programación Web 1",
+      "topics": [
+        { "name": "Intro web", "description": "Conceptos básicos de desarrollo web y arquitectura cliente-servidor." },
+        { "name": "HTML5", "description": "Estructura y elementos básicos de HTML5." },
+        { "name": "CSS básico", "description": "Selectores y propiedades básicas de CSS3." },
+        { "name": "Responsive", "description": "Diseño responsivo y uso de media queries." },
+        { "name": "Layout CSS", "description": "Uso de Flexbox y Grid CSS para maquetación." },
+        { "name": "JavaScript básico", "description": "Sintaxis básica y tipos de datos en JavaScript." },
+        { "name": "Funciones JS", "description": "Implementación de funciones y manejo de eventos en JavaScript." },
+        { "name": "DOM", "description": "Manipulación del DOM con JavaScript." },
+        { "name": "AJAX", "description": "Uso de AJAX y Fetch API para comunicación asíncrona." },
+        { "name": "Frameworks CSS", "description": "Introducción a frameworks CSS como Bootstrap." },
+        { "name": "Git", "description": "Control de versiones con Git." },
+        { "name": "Formularios", "description": "Diseño y validación de formularios del lado del cliente." },
+        { "name": "Almacenamiento local", "description": "Uso de localStorage y sessionStorage en el navegador." },
+        { "name": "APIs HTML5", "description": "Introducción a APIs de HTML5 como Geolocation y Canvas." },
+        { "name": "Optimización", "description": "Técnicas básicas de optimización y rendimiento web." },
+        { "name": "Accesibilidad", "description": "Principios de accesibilidad web y mejores prácticas." }
+      ]
+    },
+    {
+      "id": "PW2",
+      "name": "Programación Web 2",
+      "topics": [
+        { "name": "Repaso web", "description": "Revisión de conceptos de Programación Web 1." },
+        { "name": "Backend", "description": "Introducción a la programación del lado del servidor." },
+        { "name": "Entorno desarrollo", "description": "Configuración de servidor web y base de datos." },
+        { "name": "Lenguaje backend", "description": "Fundamentos de un lenguaje de programación del lado del servidor." },
+        { "name": "Sesiones", "description": "Manejo de sesiones y cookies en aplicaciones web." },
+        { "name": "CRUD", "description": "Operaciones CRUD con bases de datos." },
+        { "name": "APIs RESTful", "description": "Diseño e implementación de APIs RESTful." },
+        { "name": "Autenticación", "description": "Métodos de autenticación y autorización en aplicaciones web." },
+        { "name": "Seguridad web", "description": "Conceptos básicos de seguridad web (HTTPS, SQL injection, XSS)." },
+        { "name": "Archivos", "description": "Manejo y carga de archivos en aplicaciones web." },
+        { "name": "Correo electrónico", "description": "Implementación de envío de correos desde aplicaciones web." },
+        { "name": "Frameworks backend", "description": "Introducción a frameworks del lado del servidor." },
+        { "name": "MVC", "description": "Arquitectura Modelo-Vista-Controlador en desarrollo web." },
+        { "name": "Despliegue", "description": "Técnicas de despliegue de aplicaciones web." },
+        { "name": "Cloud", "description": "Introducción a servicios en la nube para aplicaciones web." },
+        { "name": "Escalabilidad", "description": "Optimización y escalabilidad de aplicaciones web." }
+      ]
+    }
+  ]
+}

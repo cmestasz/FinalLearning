@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Networking;
-using System;
 
 public class ClassroomManager : MonoBehaviour
 {
@@ -25,7 +22,7 @@ public class ClassroomManager : MonoBehaviour
     {
         StartCoroutine(FetchResponse());
         courseText.text = GlobalStorage.GetCourse();
-        topicText.text = GlobalStorage.GetTopic();
+        topicText.text = GlobalStorage.GetTopic().name;
     }
 
     public void StartClass()
@@ -81,7 +78,8 @@ public class ClassroomManager : MonoBehaviour
         Dictionary<string, string> data = new()
         {
             { "course", GlobalStorage.GetCourse() },
-            { "topic", GlobalStorage.GetTopic() }
+            { "topicName", GlobalStorage.GetTopic().name },
+            { "topicDescription", GlobalStorage.GetTopic().description }
         };
 
         yield return APIManager.PostRequest("http://localhost:5000/classData", data, callback);
