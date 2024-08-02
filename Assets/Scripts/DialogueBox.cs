@@ -8,9 +8,12 @@ public class DialogueBox : MonoBehaviour
 {
     public bool writing;
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private TMP_InputField inputText;
     [SerializeField] private Animator clickImage;
     [SerializeField] private float writeDelay;
+    [SerializeField] private PlayerController player;
     private bool firstAnim = true;
+    public List<string> inputList = new List<string>();
 
 
     void Start()
@@ -21,6 +24,37 @@ public class DialogueBox : MonoBehaviour
     {
         gameObject.SetActive(true);
         StartCoroutine(Write("<b>" + talker + "</b>\n" + dialogue));
+    }
+
+    public string GetInput(int index)
+    {
+        return inputList[index];
+    }
+
+    public void ClearInputs()
+    {
+        inputList.Clear();
+    }
+
+    public void SaveInput()
+    {
+        inputList.Add(inputText.text);
+    }
+
+    public void EnableInput()
+    {
+        inputText.gameObject.SetActive(true);
+        clickImage.SetBool("IsVisible", false);
+        dialogueText.gameObject.SetActive(false);
+        player.canMove = false;
+    }
+
+    public void DisableInput()
+    {
+        inputText.text = "";
+        inputText.gameObject.SetActive(false);
+        dialogueText.gameObject.SetActive(true);
+        player.canMove = true;
     }
 
     public void ClearDialogue()
@@ -62,5 +96,10 @@ public class DialogueBox : MonoBehaviour
     public bool CanConsecutiveWrite()
     {
         return !writing;
+    }
+
+    public bool InputDone()
+    {
+        return Input.GetKeyDown(KeyCode.Return);
     }
 }

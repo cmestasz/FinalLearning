@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TeacherController : MonoBehaviour, IKeyInteractable
@@ -19,18 +20,21 @@ public class TeacherController : MonoBehaviour, IKeyInteractable
                 $"{teacherName}:Hola! Listo para tu clase de {topic}!",
                 "<<click",
                 "SISTEMA:Estas listo para la clase de",
-                "<<wait 0.25",
+                "<<timewait 0.25",
                 $"{teacherName}:No estaba preguntando!",
-                "<<wait 0.25",
-                "<<endforce"
+                "<<timewait 0.25",
+                "<<forceend"
             }
         );
 
-        string dialogeEnd = string.Join(
+        string dialogueEnd = string.Join(
             "\n",
             new string[] {
-                $"{teacherName}:No hay reembolsos!",
-                "<<end"
+                $"{teacherName}:Preguntas?",
+                "<<click",
+                "<<inputstart",
+                "<<inputend",
+                "<<forceend"
             }
         );
 
@@ -42,9 +46,45 @@ public class TeacherController : MonoBehaviour, IKeyInteractable
         }
         else
         {
-            yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogeEnd);
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueEnd);
+            string question = dialogueBox.GetInput(0);
+            dialogueBox.ClearInputs();
+            yield return FetchResponse(question);
         }
     }
+
+    private IEnumerator FetchResponse(string question)
+    {
+        void callback(string response)
+        {
+            Debug.Log(response);
+            string answer = JsonUtility.FromJson<Response>(response).answer;
+            string dialogue = string.Join(
+                "\n",
+                new string[] {
+                    $"{teacherName}:{answer}",
+                    "<<end"
+                }
+            );
+
+            Debug.Log(dialogue);
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, dialogue));
+        }
+
+        Dictionary<string, string> data = new()
+        {
+            { "question", question }
+        };
+
+        yield return APIManager.PostRequest("http://localhost:5000/question", data, callback);
+    }
+
+    private class Response
+    {
+        public string answer;
+    }
+
+
 
     // Start is called before the first frame update
     void Start()

@@ -11,3 +11,11 @@ def classData():
     return {
         "answer": f"Esta deberia ser la pagina uno.^^^Esta deberia ser la pagina dos.^^^Esta deberia ser la pagina tres.^^^Curso:{course}^^^Tema:{topic}"
     }
+
+
+@app.route('/question', methods=['GET', 'POST',])
+def question():
+    question = request.form.get('question', 'Pregunta no definida')
+    return {
+        "answer": f"Respuesta a la pregunta '{question}'"
+    }

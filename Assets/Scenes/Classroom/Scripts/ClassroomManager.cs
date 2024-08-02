@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using System;
 
 public class ClassroomManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class ClassroomManager : MonoBehaviour
     [SerializeField] private GameObject classContainer;
     [SerializeField] private float cameraSpeed, zoomSpeed;
     public bool classDone = false;
+    [SerializeField] private TMP_Text pageText;
+    private string[] classPages;
+    private int pageIdx = -1;
 
     void Start()
     {
@@ -36,11 +40,11 @@ public class ClassroomManager : MonoBehaviour
         mainCamera.GetComponent<CameraController>().isFollowingPlayer = false;
         yield return StartCoroutine(MoveResizeCamera(classCenter, 5));
         classContainer.SetActive(true);
-        yield return new WaitForSeconds(3);
-        yield return EndClass();
+        yield return new WaitForSeconds(2);
+        NextPage();
     }
 
-    private IEnumerator EndClass()
+    private IEnumerator EndClassCoroutine()
     {
         classContainer.GetComponent<Animator>().SetTrigger("ClassEnded");
         Vector3 playerPos = player.transform.position;
@@ -54,7 +58,7 @@ public class ClassroomManager : MonoBehaviour
 
     private IEnumerator MoveResizeCamera(Vector3 targetPos, float targetSize)
     {
-        while (Vector3.Distance(mainCamera.transform.position, targetPos) > 0.5f || Mathf.Abs(mainCamera.orthographicSize - targetSize) > 0.15f)
+        while (Vector3.Distance(mainCamera.transform.position, targetPos) > 0.15f || Mathf.Abs(mainCamera.orthographicSize - targetSize) > 0.15f)
         {
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetPos, cameraSpeed * Time.deltaTime);
             mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, targetSize, zoomSpeed * Time.deltaTime);
@@ -66,32 +70,45 @@ public class ClassroomManager : MonoBehaviour
 
     private IEnumerator FetchResponse()
     {
-        WWWForm form = new();
-        form.AddField("course", GlobalStorage.GetCourse());
-        form.AddField("topic", GlobalStorage.GetTopic());
 
-        UnityWebRequest request = UnityWebRequest.Post("http://localhost:5000/classData", form);
-        yield return request.SendWebRequest();
-        if (request.result == UnityWebRequest.Result.Success)
+        void callback(string response)
         {
-            string response = request.downloadHandler.text;
             Response res = JsonUtility.FromJson<Response>(response);
             Debug.Log(res.answer);
+            classPages = res.answer.Split("^^^");
         }
-        else
+
+        Dictionary<string, string> data = new()
         {
-            Debug.Log(request.error);
-        }
+            { "course", GlobalStorage.GetCourse() },
+            { "topic", GlobalStorage.GetTopic() }
+        };
+
+        yield return APIManager.PostRequest("http://localhost:5000/classData", data, callback);
     }
 
     public void NextPage()
     {
-        Debug.Log("Next Page");
+        pageIdx = (pageIdx + 1) % classPages.Length;
+        pageText.text = FormatPage(classPages[pageIdx]);
     }
 
     public void PrevPage()
     {
-        Debug.Log("Prev Page");
+        pageIdx = (pageIdx - 1 + classPages.Length) % classPages.Length;
+        pageText.text = FormatPage(classPages[pageIdx]);
+    }
+
+    public void EndClass()
+    {
+        StartCoroutine(EndClassCoroutine());
+    }
+
+    private string FormatPage(string page)
+    {
+        string res = "<b>" + (pageIdx + 1) + "/" + classPages.Length + "</b>\n";
+        res += page;
+        return res;
     }
 
     // Update is called once per frame

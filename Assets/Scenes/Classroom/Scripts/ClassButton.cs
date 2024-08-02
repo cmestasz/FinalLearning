@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class ClassButton : MonoBehaviour
 {
-    [SerializeField] private bool right;
+    private enum Types { Next, Prev, End }
+    [SerializeField] private Types type;
     [SerializeField] private ClassroomManager classroomManager;
 
     void OnMouseDown()
     {
-        if (right)
-            classroomManager.NextPage();
-        else
-            classroomManager.PrevPage();
+        switch (type)
+        {
+            case Types.Next:
+                classroomManager.NextPage();
+                break;
+            case Types.Prev:
+                classroomManager.PrevPage();
+                break;
+            case Types.End:
+                classroomManager.EndClass();
+                break;
+        }
     }
 }
