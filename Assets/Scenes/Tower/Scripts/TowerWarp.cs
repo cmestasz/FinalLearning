@@ -5,6 +5,7 @@ public class TowerWarp : WarpController
     public enum WarpType { Up, Down, FromOutside, FromInside };
     [SerializeField] private int course;
     [SerializeField] private int floor;
+    [SerializeField] private GameObject particles;
     private int floorDest;
     private int courseDest;
     private WarpType cameFrom;
@@ -45,6 +46,8 @@ public class TowerWarp : WarpController
             case WarpType.FromOutside:
                 floorDest = floor;
                 courseDest = course;
+                particles.transform.position = transform.position;
+                particles.SetActive(true);
                 break;
             case WarpType.FromInside:
                 floorDest = TowerData.floor;
