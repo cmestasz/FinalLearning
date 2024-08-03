@@ -6,6 +6,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 {
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private GameObject fireworks;
+    [SerializeField] private EndController endController;
     private string[] questions;
     private string[] answers;
     private bool[] results;
@@ -22,7 +23,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
         List<string> dialogue = new()
             {
-                $"{characterName}:Crees saber lo que necesario?",
+                $"{characterName}:Crees saber lo que es necesario?",
                 "<<click",
                 $"{characterName}:Vamos a ver si puedes responder a estas preguntas.",
                 "<<click"
@@ -72,7 +73,12 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         dialogueString = string.Join("\n", dialogue);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString);
         if (hasWon)
-            fireworks.SetActive(true);
+        {
+            if (GlobalStorage.AllDone())
+                endController.EndGame();
+            else
+                fireworks.SetActive(true);
+        }
     }
 
     // Start is called before the first frame update

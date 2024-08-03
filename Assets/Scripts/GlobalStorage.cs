@@ -11,6 +11,16 @@ public class GlobalStorage : MonoBehaviour
         coursesDone = new bool[CourseData.courses.Count];
     }
 
+    public static bool AllDone()
+    {
+        foreach (bool done in coursesDone)
+        {
+            if (!done)
+                return false;
+        }
+        return true;
+    }
+
     public static string GetCourse()
     {
         try

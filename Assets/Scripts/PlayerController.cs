@@ -20,20 +20,21 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = Vector2.zero;
         if (Input.GetKey(KeyCode.W))
         {
-            dir = Vector2.up;
+            dir += Vector2.up;
         }
-        else if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
-            dir = Vector2.down;
+            dir += Vector2.down;
         }
-        else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
-            dir = Vector2.left;
+            dir += Vector2.left;
         }
-        else if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            dir = Vector2.right;
+            dir += Vector2.right;
         }
+        dir = dir.normalized;
         if (canMove)
             rb.MovePosition((Vector2)transform.position + moveSpeed * dir);
     
