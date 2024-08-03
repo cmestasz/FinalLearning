@@ -9,9 +9,16 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     private string[] answers;
     private bool[] results;
     private string[] correct;
+    private bool questionsLoaded = false;
 
     public IEnumerator Interact()
     {
+        if (!questionsLoaded)
+        {
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.");
+            yield return new WaitUntil(() => questionsLoaded);
+        }
+
         List<string> dialogue = new()
             {
                 $"{characterName}:Crees saber lo que necesario?",
@@ -101,7 +108,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
             Debug.Log(response);
             string[] questions = JsonUtility.FromJson<Questions>(response).questions;
             this.questions = questions;
-
+            questionsLoaded = true;
         }
 
         Dictionary<string, string> data = new()

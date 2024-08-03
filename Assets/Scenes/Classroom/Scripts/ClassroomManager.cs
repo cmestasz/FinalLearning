@@ -17,6 +17,7 @@ public class ClassroomManager : MonoBehaviour
     [SerializeField] private TMP_Text pageText;
     private string[] classPages;
     private int pageIdx = -1;
+    public bool classLoaded = false;
 
     void Start()
     {
@@ -74,6 +75,7 @@ public class ClassroomManager : MonoBehaviour
             Pages res = JsonUtility.FromJson<Pages>(response);
             Debug.Log(res.pages);
             classPages = res.pages;
+            classLoaded = true;
         }
 
         Dictionary<string, string> data = new()

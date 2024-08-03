@@ -12,11 +12,17 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
     {
         if (!classroomManager.classDone)
         {
+            if (!classroomManager.classLoaded)
+            {
+                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando la clase.");
+                yield return new WaitUntil(() => classroomManager.classLoaded);
+            }
             yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueStart);
             classroomManager.StartClass();
         }
         else
         {
+
             yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueEnd);
             string question = dialogueBox.GetInput(0);
             dialogueBox.ClearInputs();
