@@ -29,7 +29,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         void callback(string response)
         {
             Debug.Log(response);
-            string answer = JsonUtility.FromJson<Response>(response).answer;
+            string answer = JsonUtility.FromJson<Answer>(response).answer;
             string dialogue = string.Join(
                 "\n",
                 new string[] {
@@ -50,7 +50,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         yield return APIManager.PostRequest("http://localhost:5000/question", data, callback);
     }
 
-    private class Response
+    private class Answer
     {
         public string answer;
     }
@@ -58,6 +58,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
     // Start is called before the first frame update
     void Start()
     {
+        ChooseNameSprite();
         string topic = GlobalStorage.GetTopic().name;
         dialogueStart = string.Join(
             "\n",
@@ -82,7 +83,6 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
                 "<<forceend"
             }
         );
-        ChooseNameSprite();
     }
 
     // Update is called once per frame

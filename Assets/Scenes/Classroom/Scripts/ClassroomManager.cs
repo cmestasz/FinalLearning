@@ -70,9 +70,10 @@ public class ClassroomManager : MonoBehaviour
 
         void callback(string response)
         {
-            Response res = JsonUtility.FromJson<Response>(response);
-            Debug.Log(res.answer);
-            classPages = res.answer.Split("^^^");
+            Debug.Log(response);
+            Pages res = JsonUtility.FromJson<Pages>(response);
+            Debug.Log(res.pages);
+            classPages = res.pages;
         }
 
         Dictionary<string, string> data = new()
@@ -115,8 +116,8 @@ public class ClassroomManager : MonoBehaviour
 
     }
 
-    private class Response
+    private class Pages
     {
-        public string answer;
+        public string[] pages;
     }
 }

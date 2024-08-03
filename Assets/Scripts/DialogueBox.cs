@@ -30,6 +30,11 @@ public class DialogueBox : MonoBehaviour
         return inputList[index];
     }
 
+    public string[] GetInputs()
+    {
+        return inputList.ToArray();
+    }
+
     public void ClearInputs()
     {
         inputList.Clear();
