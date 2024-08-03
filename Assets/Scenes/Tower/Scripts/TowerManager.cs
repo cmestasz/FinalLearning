@@ -11,6 +11,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Transform downWarp;
     [SerializeField] private TMP_Text courseText;
     [SerializeField] private TMP_Text floorText;
+    [SerializeField] private GameObject fireworks;
     private const int CLASSROOMS_PER_FLOOR = 4;
 
     // Start is called before the first frame update
@@ -42,6 +43,9 @@ public class TowerManager : MonoBehaviour
         }
         player.transform.position = new Vector3(pos.x, pos.y, player.transform.position.z);
         Camera.main.transform.position = new Vector3(pos.x, pos.y, Camera.main.transform.position.z);
+
+        if (GlobalStorage.coursesDone[TowerData.course])
+            fireworks.SetActive(true);
     }
 
     // Update is called once per frame

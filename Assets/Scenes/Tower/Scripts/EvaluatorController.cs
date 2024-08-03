@@ -5,6 +5,7 @@ using UnityEngine;
 public class EvaluatorController : AnyCharacterController, IKeyInteractable
 {
     [SerializeField] private DialogueBox dialogueBox;
+    [SerializeField] private GameObject fireworks;
     private string[] questions;
     private string[] answers;
     private bool[] results;
@@ -56,9 +57,11 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         }
         dialogue.Add($"{characterName}:Has respondido correctamente a {correctCount} de {questions.Length} preguntas.");
         dialogue.Add("<<click");
-        if (correctCount >= questions.Length / 2)
+        bool hasWon = correctCount >= questions.Length * 2 / 3;
+        if (hasWon)
         {
             dialogue.Add($"{characterName}:Bien hecho! Has demostrado que sabes lo que necesitas.");
+            GlobalStorage.coursesDone[TowerData.course] = true;
         }
         else
         {
@@ -68,6 +71,8 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
         dialogueString = string.Join("\n", dialogue);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString);
+        if (hasWon)
+            fireworks.SetActive(true);
     }
 
     // Start is called before the first frame update

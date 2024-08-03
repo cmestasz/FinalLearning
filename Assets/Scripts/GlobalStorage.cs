@@ -3,10 +3,12 @@ using UnityEngine;
 public class GlobalStorage : MonoBehaviour
 {
     public static CourseData CourseData;
+    public static bool[] coursesDone;
 
     void Awake()
     {
         CourseData = JsonUtility.FromJson<CourseData>(Resources.Load<TextAsset>("CourseData").text);
+        coursesDone = new bool[CourseData.courses.Count];
     }
 
     public static string GetCourse()
