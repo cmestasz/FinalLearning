@@ -10,6 +10,8 @@ public class TowerWarp : WarpController
     private int courseDest;
     private WarpType cameFrom;
     [SerializeField] private WarpType warpType;
+    [SerializeField] private DialogueBox dialogueBox;
+
     void Start()
     {
         sceneName = "Tower";
@@ -31,6 +33,7 @@ public class TowerWarp : WarpController
                 if (TowerData.floor >= TowerData.MAX_FLOOR)
                 {
                     Debug.Log("No way up");
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Una barrera mágica te impide subir más.\n<<end"));
                     return false;
                 }
                 floorDest = TowerData.floor + 1;
@@ -39,6 +42,7 @@ public class TowerWarp : WarpController
                 if (TowerData.floor <= 0)
                 {
                     Debug.Log("No way down");
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Una barrera mágica te impide bajar más.\n<<end"));
                     return false;
                 }
                 floorDest = TowerData.floor - 1;

@@ -4,6 +4,7 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject evaluator;
     [SerializeField] private ClassroomWarp[] classroomWarps;
     [SerializeField] private Transform[] classroomBackWarps;
     [SerializeField] private Transform outsideWarp;
@@ -17,9 +18,14 @@ public class TowerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        courseText.text = GlobalStorage.GetCourse();
+        courseText.text = GlobalStorage.GetCurrentCourse();
         floorText.text = "Piso " + (TowerData.floor + 1);
         Vector2 pos = Vector2.zero;
+
+        if (TowerData.floor == TowerData.MAX_FLOOR)
+        {
+            evaluator.SetActive(true);
+        }
 
         foreach (ClassroomWarp clsw in classroomWarps)
         {
@@ -44,7 +50,7 @@ public class TowerManager : MonoBehaviour
         player.transform.position = new Vector3(pos.x, pos.y, player.transform.position.z);
         Camera.main.transform.position = new Vector3(pos.x, pos.y, Camera.main.transform.position.z);
 
-        if (GlobalStorage.coursesDone[TowerData.course])
+        if (GlobalStorage.IsCourseDone(TowerData.course))
             fireworks.SetActive(true);
     }
 

@@ -17,8 +17,8 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     {
         if (!questionsLoaded)
         {
-            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.");
-            yield return new WaitUntil(() => questionsLoaded);
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.\n<<end");
+            yield break;
         }
 
         List<string> dialogue = new()
@@ -74,7 +74,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString);
         if (hasWon)
         {
-            if (GlobalStorage.AllDone())
+            if (GlobalStorage.AreAllCoursesDone())
                 endController.EndGame();
             else
                 fireworks.SetActive(true);
@@ -124,9 +124,9 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
         Dictionary<string, string> data = new()
         {
-            { "course", GlobalStorage.GetCourse() },
-            { "topic", GlobalStorage.GetTopic().name },
-            { "description", GlobalStorage.GetTopic().description }
+            { "course", GlobalStorage.GetCurrentCourse() },
+            { "topic", GlobalStorage.GetCurrentTopic().name },
+            { "description", GlobalStorage.GetCurrentTopic().description }
         };
 
         yield return APIManager.PostRequest("http://localhost:5000/testquestions", data, callback);

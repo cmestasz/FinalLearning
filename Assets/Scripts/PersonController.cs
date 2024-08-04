@@ -4,11 +4,12 @@ using UnityEngine;
 public class PersonController : AnyCharacterController, IKeyInteractable
 {
     [SerializeField] private DialogueBox dialogueBox;
+    private int dialogueIndex = 0;
 
     public IEnumerator Interact()
     {
-        string dialogue = PersonDialogues.GetRandomDialogue(characterName);
-
+        string dialogue = PersonDialogues.GetDialogue(dialogueIndex, characterName);
+        dialogueIndex++;
         yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogue);
     }
 

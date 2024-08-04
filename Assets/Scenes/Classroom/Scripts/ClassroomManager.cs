@@ -22,8 +22,8 @@ public class ClassroomManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(FetchResponse());
-        courseText.text = GlobalStorage.GetCourse();
-        topicText.text = GlobalStorage.GetTopic().name;
+        courseText.text = GlobalStorage.GetCurrentCourse();
+        topicText.text = GlobalStorage.GetCurrentTopic().name;
     }
 
     public void StartClass()
@@ -80,9 +80,9 @@ public class ClassroomManager : MonoBehaviour
 
         Dictionary<string, string> data = new()
         {
-            { "course", GlobalStorage.GetCourse() },
-            { "topicName", GlobalStorage.GetTopic().name },
-            { "topicDescription", GlobalStorage.GetTopic().description }
+            { "course", GlobalStorage.GetCurrentCourse() },
+            { "topicName", GlobalStorage.GetCurrentTopic().name },
+            { "topicDescription", GlobalStorage.GetCurrentTopic().description }
         };
 
         yield return APIManager.PostRequest("http://localhost:5000/classData", data, callback);

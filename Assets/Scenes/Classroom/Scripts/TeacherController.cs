@@ -14,8 +14,8 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         {
             if (!classroomManager.classLoaded)
             {
-                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando la clase.");
-                yield return new WaitUntil(() => classroomManager.classLoaded);
+                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando la clase.\n<<end");
+                yield break;
             }
             yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueStart);
             classroomManager.StartClass();
@@ -65,7 +65,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
     void Start()
     {
         ChooseNameSprite();
-        string topic = GlobalStorage.GetTopic().name;
+        string topic = GlobalStorage.GetCurrentTopic().name;
         dialogueStart = string.Join(
             "\n",
             new string[] {
