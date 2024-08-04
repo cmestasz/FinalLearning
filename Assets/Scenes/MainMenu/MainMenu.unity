@@ -439,8 +439,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   writing: 0
   dialogueText: {fileID: 916113548}
+  inputText: {fileID: 0}
   clickImage: {fileID: 1369892237}
   writeDelay: 0.015
+  player: {fileID: 0}
+  inputList: []
 --- !u!1 &526485715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,7 +1948,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d526babf189b744b7b9d954c53b83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  courseData: {fileID: 11400000, guid: 7f5da20a1b571cb4ba29498a199fd658, type: 2}
 --- !u!1 &1936123652
 GameObject:
   m_ObjectHideFlags: 0

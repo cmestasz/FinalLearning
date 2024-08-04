@@ -16,7 +16,7 @@ public class IntroManager : MonoBehaviour
     {
         dialogueBox = GetComponentInChildren<DialogueBox>();
         animator = GetComponent<Animator>();
-        // PlayerPrefs.SetInt("Intro", 0);
+        PlayerPrefs.SetInt("Intro", 0);
         if (PlayerPrefs.GetInt("Intro") == 0)
         {
             PlayerPrefs.SetInt("Intro", 1);
