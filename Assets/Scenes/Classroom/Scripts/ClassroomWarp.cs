@@ -1,5 +1,8 @@
+using UnityEngine;
+
 public class ClassroomWarp : WarpController
 {
+    [SerializeField] private DialogueBox dialogueBox;
     public int topic;
 
     void Start()
@@ -14,6 +17,12 @@ public class ClassroomWarp : WarpController
 
     public override bool ValidateWarp()
     {
+        if (EvaluatorController.blockLeave)
+        {
+            Debug.Log("Can't leave yet");
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE));
+            return false;
+        }
         return true;
     }
 }

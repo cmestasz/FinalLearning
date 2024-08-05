@@ -9,7 +9,7 @@ public class ResolutionButton : MonoBehaviour
 
     public void ClickAction()
     {
-        Vector2[] resolutionsList = SettingsManager.resolutionsList;
+        Vector2Int[] resolutionsList = SettingsManager.resolutionsList;
         int resolutionIndex = PlayerPrefs.GetInt("resolutionIndex");
         switch (direction)
         {
@@ -25,7 +25,7 @@ public class ResolutionButton : MonoBehaviour
                 break;
         }
         PlayerPrefs.SetInt("resolutionIndex", resolutionIndex);
-        Vector2 resolution = resolutionsList[resolutionIndex];
+        Vector2Int resolution = resolutionsList[resolutionIndex];
         Debug.Log("Resolution changed to " + resolution);
         resolutionText.text = resolution.x + "x" + resolution.y;
         Screen.SetResolution((int)resolution.x, (int)resolution.y, PlayerPrefs.GetInt("fullscreen") == 1);

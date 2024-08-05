@@ -11,6 +11,7 @@ public class TowerWarp : WarpController
     private WarpType cameFrom;
     [SerializeField] private WarpType warpType;
     [SerializeField] private DialogueBox dialogueBox;
+    [SerializeField] private EvaluatorController evaluator;
 
     void Start()
     {
@@ -27,13 +28,20 @@ public class TowerWarp : WarpController
 
     public override bool ValidateWarp()
     {
+        if (evaluator != null && EvaluatorController.blockLeave)
+        {
+            Debug.Log("Can't leave yet");
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE));
+            return false;
+        }
+
         switch (warpType)
         {
             case WarpType.Up:
                 if (TowerData.floor >= TowerData.MAX_FLOOR)
                 {
                     Debug.Log("No way up");
-                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Una barrera mágica te impide subir más.\n<<end"));
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.NO_WAY_UP));
                     return false;
                 }
                 floorDest = TowerData.floor + 1;
@@ -42,7 +50,7 @@ public class TowerWarp : WarpController
                 if (TowerData.floor <= 0)
                 {
                     Debug.Log("No way down");
-                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Una barrera mágica te impide bajar más.\n<<end"));
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.NO_WAY_DOWN));
                     return false;
                 }
                 floorDest = TowerData.floor - 1;
@@ -56,6 +64,18 @@ public class TowerWarp : WarpController
             case WarpType.FromInside:
                 floorDest = TowerData.floor;
                 courseDest = TowerData.course;
+                if (!ClassroomManager.classDone)
+                {
+                    Debug.Log("Class not done");
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.CLASS_NOT_DONE));
+                    return false;
+                }
+                if (TeacherController.blockLeave)
+                {
+                    Debug.Log("Wait for answer");
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.WAIT_FOR_ANSWER));
+                    return false;
+                }
                 break;
         }
         cameFrom = warpType;

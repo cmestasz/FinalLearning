@@ -13,7 +13,8 @@ public class ClassroomManager : MonoBehaviour
     [SerializeField] private Vector3 classCenter;
     [SerializeField] private GameObject classContainer;
     [SerializeField] private float cameraSpeed, zoomSpeed;
-    public bool classDone = false;
+    [SerializeField] private DialogueBox dialogueBox;
+    public static bool classDone = false;
     [SerializeField] private TMP_Text pageText;
     private string[] classPages;
     private int pageIdx = -1;
@@ -52,11 +53,12 @@ public class ClassroomManager : MonoBehaviour
         player.canMove = true;
         mainCamera.GetComponent<CameraController>().isFollowingPlayer = true;
         topicBanner.SetBool("isVisible", true);
+        yield return DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Puedes acercarte al profesor para realizar cualquier pregunta.\n<<end");
     }
 
     private IEnumerator MoveResizeCamera(Vector3 targetPos, float targetSize)
     {
-        while (Vector3.Distance(mainCamera.transform.position, targetPos) > 0.15f || Mathf.Abs(mainCamera.orthographicSize - targetSize) > 0.15f)
+        while (Vector3.Distance(mainCamera.transform.position, targetPos) > 0.05f || Mathf.Abs(mainCamera.orthographicSize - targetSize) > 0.05f)
         {
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetPos, cameraSpeed * Time.deltaTime);
             mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, targetSize, zoomSpeed * Time.deltaTime);

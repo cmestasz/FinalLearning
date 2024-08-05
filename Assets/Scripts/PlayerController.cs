@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
     [SerializeField] private Animator interactText;
     private IKeyInteractable interactable;
     private Rigidbody2D rb;
     public bool canMove = true;
+    private float moveSpeed;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        moveSpeed = PlayerPrefs.GetInt("speed") * 0.0025f;
     }
 
     // Update is called once per frame

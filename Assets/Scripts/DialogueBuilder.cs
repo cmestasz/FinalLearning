@@ -6,6 +6,7 @@ public static class DialogueBuilder
 {
     public static IEnumerator WriteDialogue(DialogueBox dialogueBox, string dialogue)
     {
+        yield return new WaitUntil(dialogueBox.CanConsecutiveWrite);
         string[] lines = dialogue.Split('\n');
         foreach (string line in lines)
         {

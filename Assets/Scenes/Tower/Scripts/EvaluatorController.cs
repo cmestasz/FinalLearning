@@ -12,11 +12,13 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     private bool[] results;
     private string[] correct;
     private bool questionsLoaded = false;
+    public static bool blockLeave = false;
 
     public IEnumerator Interact()
     {
         if (!questionsLoaded)
         {
+            FetchQuestions();
             yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.\n<<end");
             yield break;
         }
@@ -79,13 +81,13 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
             else
                 fireworks.SetActive(true);
         }
+        blockLeave = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         ChooseNameSprite();
-        StartCoroutine(FetchQuestions());
     }
 
     // Update is called once per frame
@@ -112,7 +114,12 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         yield return APIManager.PostRequest("http://localhost:5000/testanswers", data, callback);
     }
 
-    private IEnumerator FetchQuestions()
+    private void FetchQuestions()
+    {
+        StartCoroutine(FetchQuestionsCoroutine());
+    }
+
+    private IEnumerator FetchQuestionsCoroutine()
     {
         void callback(string response)
         {
@@ -129,6 +136,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
             { "description", GlobalStorage.GetCurrentTopic().description }
         };
 
+        blockLeave = true;
         yield return APIManager.PostRequest("http://localhost:5000/testquestions", data, callback);
     }
 

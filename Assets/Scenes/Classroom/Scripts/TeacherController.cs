@@ -7,10 +7,11 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private ClassroomManager classroomManager;
     private string dialogueStart, dialogueEnd;
+    public static bool blockLeave = false;
 
     public IEnumerator Interact()
     {
-        if (!classroomManager.classDone)
+        if (!ClassroomManager.classDone)
         {
             if (!classroomManager.classLoaded)
             {
@@ -22,7 +23,12 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         }
         else
         {
-
+            if (blockLeave)
+            {
+                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy respondiendo una pregunta.\n<<end");
+                yield break;
+            }
+            blockLeave = true;
             yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueEnd);
             string question = dialogueBox.GetInput(0);
             dialogueBox.ClearInputs();
@@ -46,6 +52,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
 
             Debug.Log(dialogue);
             StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, dialogue));
+            blockLeave = false;
         }
 
         Dictionary<string, string> data = new()

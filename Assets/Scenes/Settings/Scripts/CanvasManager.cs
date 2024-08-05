@@ -23,10 +23,9 @@ public class CanvasManager : MonoBehaviour
 
     void LoadCanvas()
     {
-        Vector2[] resolutionsList = SettingsManager.resolutionsList;
-        Vector2 resolution = resolutionsList[PlayerPrefs.GetInt("resolutionIndex")];
+        Vector2Int resolution = SettingsManager.GetResolution();
         resolutionText.text = resolution.x + "x" + resolution.y;
         volumeText.text = PlayerPrefs.GetInt("volume") + "%";
-        speedText.text = PlayerPrefs.GetInt("speed") + "";
+        speedText.text = PlayerPrefs.GetInt("speed") + "%";
     }
 }
