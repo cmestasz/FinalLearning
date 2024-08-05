@@ -4,8 +4,8 @@ from flask import request
 app = Flask(__name__)
 
 
-@app.route('/classData', methods=['GET', 'POST',])
-def classData():
+@app.route('/courses', methods=['GET', 'POST',])
+def courses():
     course = request.form.get('course', 'Curso no definido')
     topicName = request.form.get('topicName', 'Tema no definido')
     topicDescription = request.form.get(
@@ -22,16 +22,16 @@ def classData():
     }
 
 
-@app.route('/question', methods=['GET', 'POST',])
-def question():
+@app.route('/ask', methods=['GET', 'POST',])
+def ask():
     question = request.form.get('question', 'Pregunta no definida')
     return {
         "answer": f"Respuesta a la pregunta '{question}'"
     }
 
 
-@app.route('/testquestions', methods=['GET', 'POST',])
-def testquestions():
+@app.route('/questions', methods=['GET', 'POST',])
+def questions():
     return {
         "questions": [
             "Pregunta 1",
@@ -48,8 +48,8 @@ def testquestions():
     }
 
 
-@app.route('/testanswers', methods=['GET', 'POST',])
-def testanswers():
+@app.route('/responses', methods=['GET', 'POST',])
+def responses():
     questions = request.form.get('questions', 'Preguntas no definidas')
     questions = questions.split("^^^")
     for q in questions:

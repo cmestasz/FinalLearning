@@ -55,8 +55,10 @@ public static class DialogueBuilder
             }
             else
             {
-                string[] parts = line.Split(':');
-                dialogueBox.WriteDialogue(parts[0], parts[1]);
+                int idx = line.IndexOf(':');
+                string talker = line[..idx];
+                string diag = line[(idx + 1)..];
+                dialogueBox.WriteDialogue(talker, diag);
             }
         }
     }

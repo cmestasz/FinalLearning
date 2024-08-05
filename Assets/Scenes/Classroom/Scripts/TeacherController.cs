@@ -8,7 +8,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
     [SerializeField] private ClassroomManager classroomManager;
     [SerializeField] private PlayerController player;
     private string dialogueStart, dialogueEnd;
-    public static bool blockLeave = false;
+    public static bool blockLeave;
 
     public IEnumerator Interact()
     {
@@ -31,7 +31,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
                 yield break;
             }
             blockLeave = true;
-            player.canMove = false;
+            PlayerController.canMove = false;
             yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueEnd, true);
             string question = dialogueBox.GetInput(0);
             dialogueBox.ClearInputs();
@@ -41,10 +41,9 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
 
     private IEnumerator FetchAnswer(string question)
     {
-        void callback(string response)
+        void callback(Answer res)
         {
-            Debug.Log(response);
-            string answer = JsonUtility.FromJson<Answer>(response).answer;
+            string answer = res.answer;
             string dialogue = string.Join(
                 "\n",
                 new string[] {
@@ -56,7 +55,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
             Debug.Log(dialogue);
             StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, dialogue, true));
             blockLeave = false;
-            player.canMove = true;
+            PlayerController.canMove = true;
         }
 
         Dictionary<string, string> data = new()
@@ -67,7 +66,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
             { "question", question }
         };
 
-        yield return APIManager.PostRequest("http://localhost:5000/question", data, callback);
+        yield return APIManager.PostRequest<Answer>("ask", data, callback, false);
     }
 
     private class Answer
@@ -78,12 +77,13 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
     // Start is called before the first frame update
     void Start()
     {
+        blockLeave = false;
         ChooseNameSprite();
         string topic = GlobalStorage.GetCurrentTopic().name;
         dialogueStart = string.Join(
             "\n",
             new string[] {
-                $"{characterName}:Hola! Listo para tu clase de {topic}!",
+                $"{characterName}:Hola! Listo para la clase de {topic}!",
                 "<<click",
                 "SISTEMA:Estas listo para la clase de",
                 "<<timewait 0.25",

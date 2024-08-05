@@ -16715,7 +16715,7 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 0
+  m_LineType: 2
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
@@ -38362,8 +38362,6 @@ MonoBehaviour:
   topicText: {fileID: 1170042144}
   classCenter: {x: 0, y: -12, z: -10}
   classContainer: {fileID: 1371091913}
-  cameraSpeed: 12.5
-  zoomSpeed: 5.5
   dialogueBox: {fileID: 1110125638}
   pageText: {fileID: 1734731591}
   classLoaded: 0
@@ -39026,11 +39024,11 @@ RectTransform:
   - {fileID: 1837642629}
   m_Father: {fileID: 964024068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 41, y: 259}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 41, y: -33.99997}
   m_SizeDelta: {x: 198.29, y: 50}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1 &1170042142
 GameObject:
   m_ObjectHideFlags: 0
@@ -44475,7 +44473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactText: {fileID: 1766529340}
-  canMove: 1
 --- !u!212 &1465826152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -45751,7 +45748,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

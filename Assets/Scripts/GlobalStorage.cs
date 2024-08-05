@@ -99,4 +99,17 @@ public class GlobalStorage : MonoBehaviour
             return new Topic();
         }
     }
+
+    public static Topic GetTopic(int idx)
+    {
+        try
+        {
+            return CourseData.courses[TowerData.course].topics[idx];
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+            return new Topic();
+        }
+    }
 }

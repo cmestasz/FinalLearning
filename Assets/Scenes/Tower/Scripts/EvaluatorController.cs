@@ -5,7 +5,7 @@ using UnityEngine;
 public class EvaluatorController : AnyCharacterController, IKeyInteractable
 {
     [SerializeField] private DialogueBox dialogueBox;
-    [SerializeField] private GameObject fireworks;
+    [SerializeField] private UnityEngine.GameObject fireworks;
     [SerializeField] private EndController endController;
     [SerializeField] private PlayerController player;
     private string[] questions;
@@ -13,7 +13,8 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     private bool[] results;
     private string[] correct;
     private bool questionsLoaded = false;
-    public static bool blockLeave = false;
+    private bool fetching = false;
+    public static bool blockLeave;
 
     public IEnumerator Interact()
     {
@@ -25,7 +26,8 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
         if (!questionsLoaded)
         {
-            FetchQuestions();
+            if (!fetching)
+                FetchQuestions();
             yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.\n<<end", true);
             yield break;
         }
@@ -35,7 +37,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
     private IEnumerator PerformTest()
     {
-        player.canMove = false;
+        PlayerController.canMove = false;
 
         List<string> dialogue = new()
             {
@@ -96,12 +98,13 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
                 fireworks.SetActive(true);
         }
         blockLeave = false;
-        player.canMove = true;
+        PlayerController.canMove = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        blockLeave = false;
         ChooseNameSprite();
     }
 
@@ -113,11 +116,10 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
     private IEnumerator ValidateAnswers()
     {
-        void callback(string response)
+        void callback(Results res)
         {
-            Results results = JsonUtility.FromJson<Results>(response);
-            this.results = results.results;
-            correct = results.correct;
+            results = res.results;
+            correct = res.correct;
         }
 
         Dictionary<string, string> data = new()
@@ -126,7 +128,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
             { "answers", string.Join("^^^", answers) }
         };
 
-        yield return APIManager.PostRequest("http://localhost:5000/testanswers", data, callback);
+        yield return APIManager.PostRequest<Results>("responses", data, callback, false);
     }
 
     private void FetchQuestions()
@@ -136,11 +138,9 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
     private IEnumerator FetchQuestionsCoroutine()
     {
-        void callback(string response)
+        void callback(Questions res)
         {
-            Debug.Log(response);
-            string[] questions = JsonUtility.FromJson<Questions>(response).questions;
-            this.questions = questions;
+            questions = res.questions;
             questionsLoaded = true;
         }
 
@@ -152,7 +152,8 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         };
 
         blockLeave = true;
-        yield return APIManager.PostRequest("http://localhost:5000/testquestions", data, callback);
+        fetching = true;
+        yield return APIManager.PostRequest<Questions>("questions", data, callback, false);
     }
 
     private class Results

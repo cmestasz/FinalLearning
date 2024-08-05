@@ -5,7 +5,7 @@ public class TowerWarp : WarpController
     public enum WarpType { Up, Down, FromOutside, FromInside };
     [SerializeField] private int course;
     [SerializeField] private int floor;
-    [SerializeField] private GameObject particles;
+    [SerializeField] private UnityEngine.GameObject particles;
     private int floorDest;
     private int courseDest;
     private WarpType cameFrom;

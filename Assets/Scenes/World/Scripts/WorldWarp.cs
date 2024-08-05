@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WorldWarp : WarpController
 {
-    [SerializeField] private GameObject particles;
+    [SerializeField] private UnityEngine.GameObject particles;
     [SerializeField] private EvaluatorController evaluator;
     [SerializeField] private DialogueBox dialogueBox;
 

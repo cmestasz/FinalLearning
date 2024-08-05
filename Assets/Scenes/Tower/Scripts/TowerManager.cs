@@ -6,6 +6,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject evaluator;
     [SerializeField] private ClassroomWarp[] classroomWarps;
+    [SerializeField] private TMP_Text[] classroomTexts;
     [SerializeField] private Transform[] classroomBackWarps;
     [SerializeField] private Transform outsideWarp;
     [SerializeField] private Transform upWarp;
@@ -27,9 +28,10 @@ public class TowerManager : MonoBehaviour
             evaluator.SetActive(true);
         }
 
-        foreach (ClassroomWarp clsw in classroomWarps)
+        for (int i = 0; i < CLASSROOMS_PER_FLOOR; i++)
         {
-            clsw.topic = TowerData.floor * CLASSROOMS_PER_FLOOR + clsw.topic;
+            classroomTexts[i].text = GlobalStorage.GetTopic(TowerData.floor * CLASSROOMS_PER_FLOOR + i).name;
+            classroomWarps[i].topic = TowerData.floor * CLASSROOMS_PER_FLOOR + i;
         }
 
         switch (TowerData.cameFrom)

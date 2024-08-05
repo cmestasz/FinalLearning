@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator interactText;
     private IKeyInteractable interactable;
     private Rigidbody2D rb;
-    public bool canMove = true;
+    public static bool canMove;
     private float moveSpeed;
     
     // Start is called before the first frame update
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = PlayerPrefs.GetInt("speed") * 0.0025f;
+        canMove = true;
     }
 
     // Update is called once per frame
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
             WarpController warp = other.GetComponent<WarpController>();
             if (warp != null)
             {
-                warp.Warp();
+                warp.Warp(transform, other.gameObject.transform.position);
             }
         } else if (other.CompareTag("KeyInteractable"))
         {

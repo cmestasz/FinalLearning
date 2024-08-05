@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Classroom/Classroom.unity
     guid: e361782a5ac37d8429fc3adfed4ec9a1
+  - enabled: 1
+    path: Assets/Scenes/Error/Error.unity
+    guid: ce8ba63ed29511441bec4604b3e830b8
   m_configObjects: {}

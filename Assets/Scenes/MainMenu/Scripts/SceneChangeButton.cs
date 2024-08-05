@@ -11,7 +11,7 @@ public class SceneChangeButton : MonoBehaviour
     public void OnClick()
     {
         if (ValidateWarp())
-            StartCoroutine(SceneChanger.ChangeScene(sceneName));
+            StartCoroutine(SceneChanger.ChangeScenePlayerless(sceneName));
     }
 
     private bool ValidateWarp()

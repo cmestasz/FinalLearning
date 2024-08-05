@@ -37,7 +37,7 @@ public class EndController : MonoBehaviour
 
     private IEnumerator EndGameCoroutine()
     {
-        player.canMove = false;
+        PlayerController.canMove = false;
         yield return new WaitForSeconds(3);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, endDialogue, true);
         yield return new WaitForSeconds(2);

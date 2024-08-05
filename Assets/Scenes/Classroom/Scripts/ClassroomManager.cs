@@ -12,9 +12,8 @@ public class ClassroomManager : MonoBehaviour
     [SerializeField] private TMP_Text topicText;
     [SerializeField] private Vector3 classCenter;
     [SerializeField] private GameObject classContainer;
-    [SerializeField] private float cameraSpeed, zoomSpeed;
     [SerializeField] private DialogueBox dialogueBox;
-    public static bool classDone = false;
+    public static bool classDone;
     [SerializeField] private TMP_Text pageText;
     private string[] classPages;
     private int pageIdx = -1;
@@ -22,6 +21,7 @@ public class ClassroomManager : MonoBehaviour
 
     void Start()
     {
+        classDone = false;
         StartCoroutine(FetchResponse());
         courseText.text = GlobalStorage.GetCurrentCourse();
         topicText.text = GlobalStorage.GetCurrentTopic().name;
@@ -35,7 +35,7 @@ public class ClassroomManager : MonoBehaviour
     private IEnumerator StartClassCoroutine()
     {
         topicBanner.SetBool("isVisible", false);
-        player.canMove = false;
+        PlayerController.canMove = false;
         mainCamera.GetComponent<CameraController>().isFollowingPlayer = false;
         yield return StartCoroutine(MoveResizeCamera(classCenter, 5));
         classContainer.SetActive(true);
@@ -50,7 +50,7 @@ public class ClassroomManager : MonoBehaviour
         playerPos.z = mainCamera.transform.position.z;
         classDone = true;
         yield return StartCoroutine(MoveResizeCamera(playerPos, 8));
-        player.canMove = true;
+        PlayerController.canMove = true;
         mainCamera.GetComponent<CameraController>().isFollowingPlayer = true;
         topicBanner.SetBool("isVisible", true);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Puedes acercarte al profesor para realizar cualquier pregunta.\n<<end", true);
@@ -58,7 +58,9 @@ public class ClassroomManager : MonoBehaviour
 
     private IEnumerator MoveResizeCamera(Vector3 targetPos, float targetSize)
     {
-        while (Vector3.Distance(mainCamera.transform.position, targetPos) > 0.05f || Mathf.Abs(mainCamera.orthographicSize - targetSize) > 0.05f)
+        float cameraSpeed = Vector3.Distance(mainCamera.transform.position, targetPos);
+        float zoomSpeed = Mathf.Abs(mainCamera.orthographicSize - targetSize);
+        while (Vector3.Distance(mainCamera.transform.position, targetPos) > 25e-3 || Mathf.Abs(mainCamera.orthographicSize - targetSize) > 25e-3)
         {
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetPos, cameraSpeed * Time.deltaTime);
             mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, targetSize, zoomSpeed * Time.deltaTime);
@@ -71,12 +73,10 @@ public class ClassroomManager : MonoBehaviour
     private IEnumerator FetchResponse()
     {
 
-        void callback(string response)
+        void callback(Pages res)
         {
-            Debug.Log(response);
-            Pages res = JsonUtility.FromJson<Pages>(response);
-            Debug.Log(res.pages);
-            classPages = res.pages;
+            Debug.Log(res.courses);
+            classPages = res.courses;
             classLoaded = true;
         }
 
@@ -87,7 +87,7 @@ public class ClassroomManager : MonoBehaviour
             { "topicDescription", GlobalStorage.GetCurrentTopic().description }
         };
 
-        yield return APIManager.PostRequest("http://localhost:5000/classData", data, callback);
+        yield return APIManager.PostRequest<Pages>("courses", data, callback, false);
     }
 
     public void NextPage()
@@ -122,6 +122,6 @@ public class ClassroomManager : MonoBehaviour
 
     private class Pages
     {
-        public string[] pages;
+        public string[] courses;
     }
 }

@@ -32,7 +32,6 @@ public static class PersonDialogues
             "/name/:Por qué todas las torres se ven iguales?",
             "<<click",
             "SISTEMA:Todas las torres son la misma torre.",
-            "<<click",
             "<<end"
         },
         new string[] {
@@ -40,32 +39,69 @@ public static class PersonDialogues
             "<<click",
             "SISTEMA:Es como si alguien fuera tan flojo como para no guardar el estado de los personajes.",
             "<<click",
+            "SISTEMA:...O las torres, o las clases, o algo en este juego.",
+            "<<click",
+            "SISTEMA:De hecho, si se guardan los cursos y los temas.",
             "<<end"
         },
         new string[] {
             "/name/:Por qué los profesores no preguntan si estás listo para la clase?",
             "<<click",
             "SISTEMA:Imagina poder hacer un sistema de selección de diálogos.",
-            "<<click",
             "<<end"
         },
         new string[] {
             "/name/:No, no vas a encontrar ningún secreto aquí.",
-            "<<click",
             "<<end"
         },
         new string[] {
             "/name/:Por qué no hay más variedad en los diálogos?",
             "<<click",
             "SISTEMA:Porque no hay más variedad en los diálogos.",
+            "<<end"
+        },
+        new string[] {
+            "/name/:He escuchado que los profesores te encierran en la escena de clase hasta que hagas la clase.",
             "<<click",
+            "SISTEMA:No quiero imaginar a alguien haciendo multiples peticiones a la API a propósito.",
+            "<<end"
+        },
+        new string[] {
+            "/name/:También he escuchado que los evaluadores te encierran en la escena de torre hasta que hagas la evaluación.",
+            "<<click",
+            "SISTEMA:No es mi culpa que los modelos de IA demoren tanto en responder.",
+            "<<end"
+        },
+        new string[] {
+            "/name/:Si vas al menú de configuración y subes tu velocidad al máximo, puedes atravesar las paredes.",
+            "<<click",
+            "SISTEMA:No lo hagas. (igualmente no puedes)",
+            "<<end"
+        },
+        new string[] {
+            "/name/:Deberías intentar salvar al pueblo en vez de hablar conmigo.",
+            "<<end"
+        },
+        new string[] {
+            "/name/:Si quieres hacer una clase de nuevo, sal y vuelve a entrar.",
+            "<<end"
+        },
+        new string[] {
+            "/name/:Si quieres hacer una evaluación de nuevo, pues no puedes.",
+            "<<click",
+            "SISTEMA:Las evaluaciones son una de las pocas cosas que se guardan en este juego.",
+            "<<end"
+        },
+        new string[] {
+            "/name/:No mires a los fuegos artificiales por mucho tiempo.",
+            "<<click",
+            "/name/:Hay muchas cosas de madera aquí...",
             "<<end"
         },
         new string[] {
             "/name/:Felicidades, encontraste un diálogo con 1/6 de probabilidad de aparecer.",
             "<<click",
-            "SISTEMA:(Habían tan pocos?)",
-            "<<click",
+            "SISTEMA:El que escribió este diálogo decidió aumentar más diálogos y no actualizar este.",
             "<<end"
         },
     };
