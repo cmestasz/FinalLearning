@@ -7,6 +7,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private GameObject fireworks;
     [SerializeField] private EndController endController;
+    [SerializeField] private PlayerController player;
     private string[] questions;
     private string[] answers;
     private bool[] results;
@@ -16,12 +17,25 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
     public IEnumerator Interact()
     {
+        if (GlobalStorage.IsCourseDone())
+        {
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Ya has demostrado que sabes lo necesario.\n<<end", true);
+            yield break;
+        }
+
         if (!questionsLoaded)
         {
             FetchQuestions();
-            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.\n<<end");
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.\n<<end", true);
             yield break;
         }
+
+        yield return PerformTest();
+    }
+
+    private IEnumerator PerformTest()
+    {
+        player.canMove = false;
 
         List<string> dialogue = new()
             {
@@ -42,7 +56,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         dialogue.Add("<<end");
 
         string dialogueString = string.Join("\n", dialogue);
-        yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString);
+        yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString, true);
 
         answers = dialogueBox.GetInputs();
         dialogueBox.ClearInputs();
@@ -64,7 +78,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         if (hasWon)
         {
             dialogue.Add($"{characterName}:Bien hecho! Has demostrado que sabes lo que necesitas.");
-            GlobalStorage.coursesDone[TowerData.course] = true;
+            GlobalStorage.SetCourseDone();
         }
         else
         {
@@ -73,7 +87,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         dialogue.Add("<<end");
 
         dialogueString = string.Join("\n", dialogue);
-        yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString);
+        yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString, true);
         if (hasWon)
         {
             if (GlobalStorage.AreAllCoursesDone())
@@ -82,6 +96,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
                 fireworks.SetActive(true);
         }
         blockLeave = false;
+        player.canMove = true;
     }
 
     // Start is called before the first frame update

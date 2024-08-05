@@ -4,21 +4,34 @@ public class GlobalStorage : MonoBehaviour
 {
     public static CourseData CourseData;
     public static bool[] coursesDone;
+    private static bool initialized = false;
 
     void Awake()
     {
-        CourseData = JsonUtility.FromJson<CourseData>(Resources.Load<TextAsset>("CourseData").text);
-        coursesDone = new bool[CourseData.courses.Count];
+        if (!initialized)
+        {
+            CourseData = JsonUtility.FromJson<CourseData>(Resources.Load<TextAsset>("CourseData").text);
+            coursesDone = new bool[CourseData.courses.Count];
+            initialized = true;
+        }
     }
 
     public static bool AreAllCoursesDone()
     {
-        foreach (bool done in coursesDone)
+        try
         {
-            if (!done)
-                return false;
+            foreach (bool done in coursesDone)
+            {
+                if (!done)
+                    return false;
+            }
+            return true;
         }
-        return true;
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+            return false;
+        }
     }
 
     public static Course GetCourse(int course)
@@ -27,20 +40,35 @@ public class GlobalStorage : MonoBehaviour
         {
             return CourseData.courses[course];
         }
-        catch
+        catch (System.Exception e)
         {
+            Debug.Log(e);
             return new Course();
         }
     }
 
-    public static bool IsCourseDone(int course)
+    public static void SetCourseDone()
     {
         try
         {
-            return coursesDone[course];
+            coursesDone[TowerData.course] = true;
         }
-        catch
+        catch (System.Exception e)
         {
+            Debug.Log(e);
+            return;
+        }
+    }
+
+    public static bool IsCourseDone()
+    {
+        try
+        {
+            return coursesDone[TowerData.course];
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
             return false;
         }
     }
@@ -51,8 +79,9 @@ public class GlobalStorage : MonoBehaviour
         {
             return CourseData.courses[TowerData.course].name;
         }
-        catch
+        catch (System.Exception e)
         {
+            Debug.Log(e);
             return "curso por defecto";
         }
     }
@@ -63,8 +92,9 @@ public class GlobalStorage : MonoBehaviour
         {
             return CourseData.courses[TowerData.course].topics[ClassroomData.topic];
         }
-        catch
+        catch (System.Exception e)
         {
+            Debug.Log(e);
             return new Topic();
         }
     }

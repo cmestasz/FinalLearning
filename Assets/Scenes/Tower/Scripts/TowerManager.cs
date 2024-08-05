@@ -50,7 +50,7 @@ public class TowerManager : MonoBehaviour
         player.transform.position = new Vector3(pos.x, pos.y, player.transform.position.z);
         Camera.main.transform.position = new Vector3(pos.x, pos.y, Camera.main.transform.position.z);
 
-        if (GlobalStorage.IsCourseDone(TowerData.course))
+        if (GlobalStorage.IsCourseDone())
             fireworks.SetActive(true);
     }
 

@@ -18,17 +18,17 @@ public class SceneChangeButton : MonoBehaviour
     {
         if (validateClass && !ClassroomManager.classDone)
         {
-            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.CLASS_NOT_DONE));
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.CLASS_NOT_DONE, false));
             return false;
         }
         if (validateQuestion && TeacherController.blockLeave)
         {
-            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.WAIT_FOR_ANSWER));
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.WAIT_FOR_ANSWER, false));
             return false;
         }
         if (validateEvaluator && EvaluatorController.blockLeave)
         {
-            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE));
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE, false));
             return false;
         }
         return true;

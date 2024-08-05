@@ -6,11 +6,11 @@ using TMPro;
 public class DialogueBox : MonoBehaviour
 {
     public bool writing;
+    public bool inputting;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private TMP_InputField inputText;
     [SerializeField] private Animator clickImage;
     [SerializeField] private float writeDelay;
-    [SerializeField] private PlayerController player;
     private bool firstAnim = true;
     public List<string> inputList = new List<string>();
 
@@ -50,7 +50,7 @@ public class DialogueBox : MonoBehaviour
         inputText.gameObject.SetActive(true);
         clickImage.SetBool("IsVisible", false);
         dialogueText.gameObject.SetActive(false);
-        player.canMove = false;
+        inputting = true;
     }
 
     public void DisableInput()
@@ -58,7 +58,7 @@ public class DialogueBox : MonoBehaviour
         inputText.text = "";
         inputText.gameObject.SetActive(false);
         dialogueText.gameObject.SetActive(true);
-        player.canMove = true;
+        inputting = false;
     }
 
     public void ClearDialogue()
@@ -70,6 +70,8 @@ public class DialogueBox : MonoBehaviour
     public void CloseDialogue()
     {
         ClearDialogue();
+        writing = false;
+        inputting = false;
         gameObject.SetActive(false);
     }
 
@@ -94,12 +96,12 @@ public class DialogueBox : MonoBehaviour
 
     public bool CanWrite()
     {
-        return !writing && Input.GetMouseButton(0);
+        return !writing && !inputting && Input.GetMouseButton(0);
     }
 
     public bool CanConsecutiveWrite()
     {
-        return !writing;
+        return !writing && !inputting;
     }
 
     public bool InputDone()

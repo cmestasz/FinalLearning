@@ -53,7 +53,7 @@ public class ClassroomManager : MonoBehaviour
         player.canMove = true;
         mainCamera.GetComponent<CameraController>().isFollowingPlayer = true;
         topicBanner.SetBool("isVisible", true);
-        yield return DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Puedes acercarte al profesor para realizar cualquier pregunta.\n<<end");
+        yield return DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Puedes acercarte al profesor para realizar cualquier pregunta.\n<<end", true);
     }
 
     private IEnumerator MoveResizeCamera(Vector3 targetPos, float targetSize)

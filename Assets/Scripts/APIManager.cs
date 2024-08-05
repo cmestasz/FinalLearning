@@ -14,6 +14,7 @@ public static class APIManager
             form.AddField(entry.Key, entry.Value);
         }
         UnityWebRequest www = UnityWebRequest.Post(url, form);
+        www.timeout = 60;
         yield return www.SendWebRequest();
         if (www.result != UnityWebRequest.Result.Success)
         {

@@ -15,21 +15,21 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         {
             if (!classroomManager.classLoaded)
             {
-                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando la clase.\n<<end");
+                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando la clase.\n<<end", true);
                 yield break;
             }
-            yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueStart);
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueStart, true);
             classroomManager.StartClass();
         }
         else
         {
             if (blockLeave)
             {
-                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy respondiendo una pregunta.\n<<end");
+                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy respondiendo una pregunta.\n<<end", true);
                 yield break;
             }
             blockLeave = true;
-            yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueEnd);
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueEnd, true);
             string question = dialogueBox.GetInput(0);
             dialogueBox.ClearInputs();
             yield return FetchAnswer(question);
@@ -51,7 +51,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
             );
 
             Debug.Log(dialogue);
-            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, dialogue));
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, dialogue, true));
             blockLeave = false;
         }
 

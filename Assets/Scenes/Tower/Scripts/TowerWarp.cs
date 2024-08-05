@@ -31,7 +31,7 @@ public class TowerWarp : WarpController
         if (evaluator != null && EvaluatorController.blockLeave)
         {
             Debug.Log("Can't leave yet");
-            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE));
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE, false));
             return false;
         }
 
@@ -41,7 +41,7 @@ public class TowerWarp : WarpController
                 if (TowerData.floor >= TowerData.MAX_FLOOR)
                 {
                     Debug.Log("No way up");
-                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.NO_WAY_UP));
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.NO_WAY_UP, false));
                     return false;
                 }
                 floorDest = TowerData.floor + 1;
@@ -50,7 +50,7 @@ public class TowerWarp : WarpController
                 if (TowerData.floor <= 0)
                 {
                     Debug.Log("No way down");
-                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.NO_WAY_DOWN));
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.NO_WAY_DOWN, false));
                     return false;
                 }
                 floorDest = TowerData.floor - 1;
@@ -67,13 +67,13 @@ public class TowerWarp : WarpController
                 if (!ClassroomManager.classDone)
                 {
                     Debug.Log("Class not done");
-                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.CLASS_NOT_DONE));
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.CLASS_NOT_DONE, false));
                     return false;
                 }
                 if (TeacherController.blockLeave)
                 {
                     Debug.Log("Wait for answer");
-                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.WAIT_FOR_ANSWER));
+                    StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.WAIT_FOR_ANSWER, false));
                     return false;
                 }
                 break;

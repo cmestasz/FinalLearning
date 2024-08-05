@@ -10,7 +10,7 @@ public class PersonController : AnyCharacterController, IKeyInteractable
     {
         string dialogue = PersonDialogues.GetDialogue(dialogueIndex, characterName);
         dialogueIndex++;
-        yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogue);
+        yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogue, true);
     }
 
     // Start is called before the first frame update

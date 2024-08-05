@@ -4,9 +4,22 @@ using UnityEngine;
 
 public static class DialogueBuilder
 {
-    public static IEnumerator WriteDialogue(DialogueBox dialogueBox, string dialogue)
+    public static IEnumerator WriteDialogue(DialogueBox dialogueBox, string dialogue, bool priority)
     {
-        yield return new WaitUntil(dialogueBox.CanConsecutiveWrite);
+        if (!dialogueBox.CanConsecutiveWrite())
+        {
+            if (priority)
+            {
+                Debug.Log("Priority dialogue override");
+                dialogueBox.CloseDialogue();
+            }
+            else
+            {
+                Debug.Log("Dialogue box is busy");
+                yield break;
+            }
+        }
+
         string[] lines = dialogue.Split('\n');
         foreach (string line in lines)
         {

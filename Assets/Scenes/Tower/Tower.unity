@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 40.999996, y: 259}
+  m_AnchoredPosition: {x: 41, y: 259}
   m_SizeDelta: {x: 198.29, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &21318305
@@ -176,7 +176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: MainMenu
   dialogueBox: {fileID: 902188353}
-  validateClassroom: 0
+  validateClass: 0
+  validateQuestion: 0
   validateEvaluator: 1
 --- !u!114 &21318306
 MonoBehaviour:
@@ -13434,6 +13435,7 @@ MonoBehaviour:
   dialogueBox: {fileID: 902188353}
   fireworks: {fileID: 822076582}
   endController: {fileID: 1748567634}
+  player: {fileID: 719124455}
 --- !u!1 &495432434
 GameObject:
   m_ObjectHideFlags: 0
@@ -13550,6 +13552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   writing: 0
+  inputting: 0
   dialogueText: {fileID: 342854997}
   inputText: {fileID: 918742944}
   clickImage: {fileID: 96377466}
@@ -41688,6 +41691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   writing: 0
+  inputting: 0
   dialogueText: {fileID: 226290993}
   inputText: {fileID: 2119843364}
   clickImage: {fileID: 1671769296}

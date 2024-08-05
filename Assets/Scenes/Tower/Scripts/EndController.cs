@@ -22,7 +22,7 @@ public class EndController : MonoBehaviour
     {
         player.canMove = false;
         yield return new WaitForSeconds(3);
-        yield return DialogueBuilder.WriteDialogue(dialogueBox, "El autor:Gracias por jugar.\n<<end");
+        yield return DialogueBuilder.WriteDialogue(dialogueBox, "El autor:Gracias por jugar.\n<<end", true);
         yield return new WaitForSeconds(2);
         Application.Quit();
     }

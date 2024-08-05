@@ -22,7 +22,7 @@ public class WorldWarp : WarpController
         if (evaluator != null && EvaluatorController.blockLeave)
         {
             Debug.Log("Can't leave yet");
-            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE));
+            StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE, false));
             return false;
         }
 
