@@ -5150,6 +5150,7 @@ MonoBehaviour:
   - Jacob
   dialogueBox: {fileID: 1110125638}
   classroomManager: {fileID: 844911255}
+  player: {fileID: 1465826151}
 --- !u!61 &50905548
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38838,11 +38839,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   writing: 0
+  inputting: 0
   dialogueText: {fileID: 936013438}
   inputText: {fileID: 659475496}
   clickImage: {fileID: 730831399}
   writeDelay: 0.015
-  player: {fileID: 1465826151}
   inputList: []
 --- !u!114 &1110125639
 MonoBehaviour:

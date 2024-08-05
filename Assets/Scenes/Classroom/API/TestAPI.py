@@ -12,12 +12,12 @@ def classData():
         'topicDescription', 'Descripcion no definida')
     return {
         "pages": [
-            f"Curso:{course}",
-            f"Tema:{topicName}",
+            f"la programacion es fhsdkfjhdsfsdfsdfsdf",
+            f"se usa para hfksjdhfksjdkhfsdfs",
             f"Descripcion:{topicDescription}",
             "Pagina de prueba",
             "Pagina de prueba",
-            "Pagina de prueba"
+            "Pagina de pruebaasdfasdfjhasldkfjhasd kjfhsaldk jlhsadfasdfasdfsd\nasfdfasd\n"
         ]
     }
 
@@ -50,6 +50,10 @@ def testquestions():
 
 @app.route('/testanswers', methods=['GET', 'POST',])
 def testanswers():
+    questions = request.form.get('questions', 'Preguntas no definidas')
+    questions = questions.split("^^^")
+    for q in questions:
+        print(q)
     return {
         "results": [
             1,

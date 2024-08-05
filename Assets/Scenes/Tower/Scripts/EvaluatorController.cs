@@ -147,8 +147,8 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         Dictionary<string, string> data = new()
         {
             { "course", GlobalStorage.GetCurrentCourse() },
-            { "topic", GlobalStorage.GetCurrentTopic().name },
-            { "description", GlobalStorage.GetCurrentTopic().description }
+            { "topicName", GlobalStorage.GetCurrentTopic().name },
+            { "topicDescription", GlobalStorage.GetCurrentTopic().description }
         };
 
         blockLeave = true;

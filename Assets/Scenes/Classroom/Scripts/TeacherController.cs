@@ -6,11 +6,13 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
 {
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private ClassroomManager classroomManager;
+    [SerializeField] private PlayerController player;
     private string dialogueStart, dialogueEnd;
     public static bool blockLeave = false;
 
     public IEnumerator Interact()
     {
+        //todo block player movement
         if (!ClassroomManager.classDone)
         {
             if (!classroomManager.classLoaded)
@@ -29,6 +31,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
                 yield break;
             }
             blockLeave = true;
+            player.canMove = false;
             yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueEnd, true);
             string question = dialogueBox.GetInput(0);
             dialogueBox.ClearInputs();
@@ -53,10 +56,14 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
             Debug.Log(dialogue);
             StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, dialogue, true));
             blockLeave = false;
+            player.canMove = true;
         }
 
         Dictionary<string, string> data = new()
         {
+            { "course", GlobalStorage.GetCurrentCourse() },
+            { "topicName", GlobalStorage.GetCurrentTopic().name },
+            { "topicDescription", GlobalStorage.GetCurrentTopic().description },
             { "question", question }
         };
 

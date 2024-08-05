@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    public static Vector2Int[] resolutionsList = { new(640, 480), new(1280, 720), new(1366, 768), new(1600, 900), new(1920, 1080), new(1920, 1200), new(2560, 1440), new(2560, 1600) };
+    public static Vector2Int[] resolutionsList = { new(640, 480), new(1280, 720), new(1366, 768) };
 
     void Start()
     {
