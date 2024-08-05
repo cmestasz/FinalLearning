@@ -7,6 +7,7 @@ public class EndController : MonoBehaviour
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private PlayerController player;
     private string endDialogue;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,10 @@ public class EndController : MonoBehaviour
             "El autor:Hecho con esmero por<br>Luis Sequeiros (@gusCreator)<br>Christian Mestas (@cmestasz)<br>Yenaro Noa (@ynoacamino)<br>Mariel Jara (@Alsnj20)<br>Álvaro Quispe (@ALVARO-QUISPE-UNSA)<br>Jhonatan Arias (@JhonatacDczel)<br>Ricardo Chambilla (@rikich3)<br>Diego Carbajal (@Gocardi)",
             "<<end",
         };
-        endDialogue = string.Join("\n", dialogue);
+        endDialogue = string.Join("|||", dialogue);
+        audioSource = GetComponent<AudioSource>();
+        Debug.Log(audioSource);
+        EndGame();
     }
 
     public void EndGame()
@@ -38,6 +42,7 @@ public class EndController : MonoBehaviour
     private IEnumerator EndGameCoroutine()
     {
         PlayerController.canMove = false;
+        audioSource.Play();
         yield return new WaitForSeconds(3);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, endDialogue, true);
         yield return new WaitForSeconds(2);

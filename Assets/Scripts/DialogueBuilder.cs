@@ -20,7 +20,7 @@ public static class DialogueBuilder
             }
         }
 
-        string[] lines = dialogue.Split('\n');
+        string[] lines = dialogue.Split("|||");
         foreach (string line in lines)
         {
             if (line.StartsWith("<<click"))

@@ -11,7 +11,7 @@ def courses():
     topicDescription = request.form.get(
         'topicDescription', 'Descripcion no definida')
     return {
-        "pages": [
+        "courses": [
             f"la programacion es fhsdkfjhdsfsdfsdfsdf",
             f"se usa para hfksjdhfksjdkhfsdfs",
             f"Descripcion:{topicDescription}",

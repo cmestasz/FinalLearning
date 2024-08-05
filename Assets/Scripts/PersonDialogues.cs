@@ -136,7 +136,7 @@ public static class PersonDialogues
         {
             dialogue[i] = dialogue[i].Replace("/name/", name);
         }
-        string dialogueString = string.Join("\n", dialogue);
+        string dialogueString = string.Join("|||", dialogue);
         return dialogueString;
     }
 }

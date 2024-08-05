@@ -3,6 +3,7 @@ using UnityEngine;
 public class ClassroomWarp : WarpController
 {
     [SerializeField] private DialogueBox dialogueBox;
+    [SerializeField] private GameObject normalWarp;
     public int topic;
 
     void Start()
@@ -23,6 +24,8 @@ public class ClassroomWarp : WarpController
             StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.EVALUATION_NOT_DONE, false));
             return false;
         }
+        normalWarp.transform.position = transform.position;
+        normalWarp.SetActive(true);
         return true;
     }
 }

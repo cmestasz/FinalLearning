@@ -20,7 +20,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     {
         if (GlobalStorage.IsCourseDone())
         {
-            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Ya has demostrado que sabes lo necesario.\n<<end", true);
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Ya has demostrado que sabes lo necesario.|||<<end", true);
             yield break;
         }
 
@@ -28,7 +28,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         {
             if (!fetching)
                 FetchQuestions();
-            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.\n<<end", true);
+            yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando las preguntas.|||<<end", true);
             yield break;
         }
 
@@ -57,7 +57,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         dialogue.Add($"{characterName}:Dame un momento para revisar tus respuestas.");
         dialogue.Add("<<end");
 
-        string dialogueString = string.Join("\n", dialogue);
+        string dialogueString = string.Join("|||", dialogue);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString, true);
 
         answers = dialogueBox.GetInputs();
@@ -88,7 +88,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         }
         dialogue.Add("<<end");
 
-        dialogueString = string.Join("\n", dialogue);
+        dialogueString = string.Join("|||", dialogue);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString, true);
         if (hasWon)
         {
@@ -128,7 +128,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
             { "answers", string.Join("^^^", answers) }
         };
 
-        yield return APIManager.PostRequest<Results>("responses", data, callback, false);
+        yield return APIManager.PostRequest<Results>("responses", data, callback);
     }
 
     private void FetchQuestions()
@@ -147,13 +147,11 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         Dictionary<string, string> data = new()
         {
             { "course", GlobalStorage.GetCurrentCourse() },
-            { "topicName", GlobalStorage.GetCurrentTopic().name },
-            { "topicDescription", GlobalStorage.GetCurrentTopic().description }
         };
 
         blockLeave = true;
         fetching = true;
-        yield return APIManager.PostRequest<Questions>("questions", data, callback, false);
+        yield return APIManager.PostRequest<Questions>("questions", data, callback);
     }
 
     private class Results

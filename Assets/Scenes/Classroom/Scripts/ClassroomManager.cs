@@ -18,6 +18,7 @@ public class ClassroomManager : MonoBehaviour
     private string[] classPages;
     private int pageIdx = -1;
     public bool classLoaded = false;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class ClassroomManager : MonoBehaviour
         StartCoroutine(FetchResponse());
         courseText.text = GlobalStorage.GetCurrentCourse();
         topicText.text = GlobalStorage.GetCurrentTopic().name;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void StartClass()
@@ -36,6 +38,7 @@ public class ClassroomManager : MonoBehaviour
     {
         topicBanner.SetBool("isVisible", false);
         PlayerController.canMove = false;
+        audioSource.Play();
         mainCamera.GetComponent<CameraController>().isFollowingPlayer = false;
         yield return StartCoroutine(MoveResizeCamera(classCenter, 5));
         classContainer.SetActive(true);
@@ -53,7 +56,7 @@ public class ClassroomManager : MonoBehaviour
         PlayerController.canMove = true;
         mainCamera.GetComponent<CameraController>().isFollowingPlayer = true;
         topicBanner.SetBool("isVisible", true);
-        yield return DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Puedes acercarte al profesor para realizar cualquier pregunta.\n<<end", true);
+        yield return DialogueBuilder.WriteDialogue(dialogueBox, "SISTEMA:Puedes acercarte al profesor para realizar cualquier pregunta.|||<<end", true);
     }
 
     private IEnumerator MoveResizeCamera(Vector3 targetPos, float targetSize)
@@ -87,7 +90,7 @@ public class ClassroomManager : MonoBehaviour
             { "topicDescription", GlobalStorage.GetCurrentTopic().description }
         };
 
-        yield return APIManager.PostRequest<Pages>("courses", data, callback, false);
+        yield return APIManager.PostRequest<Pages>("courses", data, callback);
     }
 
     public void NextPage()

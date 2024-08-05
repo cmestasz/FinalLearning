@@ -5,13 +5,14 @@ public class TowerWarp : WarpController
     public enum WarpType { Up, Down, FromOutside, FromInside };
     [SerializeField] private int course;
     [SerializeField] private int floor;
-    [SerializeField] private UnityEngine.GameObject particles;
+    [SerializeField] private GameObject particles;
     private int floorDest;
     private int courseDest;
     private WarpType cameFrom;
     [SerializeField] private WarpType warpType;
     [SerializeField] private DialogueBox dialogueBox;
     [SerializeField] private EvaluatorController evaluator;
+    [SerializeField] private GameObject normalWarp;
 
     void Start()
     {
@@ -45,6 +46,8 @@ public class TowerWarp : WarpController
                     return false;
                 }
                 floorDest = TowerData.floor + 1;
+                normalWarp.SetActive(true);
+                normalWarp.transform.position = transform.position;
                 break;
             case WarpType.Down:
                 if (TowerData.floor <= 0)
@@ -54,6 +57,8 @@ public class TowerWarp : WarpController
                     return false;
                 }
                 floorDest = TowerData.floor - 1;
+                normalWarp.SetActive(true);
+                normalWarp.transform.position = transform.position;
                 break;
             case WarpType.FromOutside:
                 floorDest = floor;
@@ -76,6 +81,8 @@ public class TowerWarp : WarpController
                     StartCoroutine(DialogueBuilder.WriteDialogue(dialogueBox, ValidationDialogues.WAIT_FOR_ANSWER, false));
                     return false;
                 }
+                normalWarp.SetActive(true);
+                normalWarp.transform.position = transform.position;
                 break;
         }
         cameFrom = warpType;

@@ -17,7 +17,7 @@ public class ErrorManager : MonoBehaviour
       "<<end"
     };
 
-    dialogue = string.Join("\n", dialogueParts);
+    dialogue = string.Join("|||", dialogueParts);
     EvaluatorController.blockLeave = false;
     TeacherController.blockLeave = false;
     PlayerController.canMove = true;

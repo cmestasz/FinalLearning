@@ -8,7 +8,8 @@ public static class APIManager
 {
     private const string BASE_URL = "https://knowledge-wardens.vercel.app/api/ai/";
     private const string TEST_URL = "http://localhost:5000/";
-    public static IEnumerator PostRequest<T>(string url, Dictionary<string, string> data, Action<T> callback, bool test)
+    private static bool test = true;
+    public static IEnumerator PostRequest<T>(string url, Dictionary<string, string> data, Action<T> callback)
     {
         WWWForm form = new();
         foreach (KeyValuePair<string, string> entry in data)
@@ -28,6 +29,7 @@ public static class APIManager
             try
             {
                 T res = JsonUtility.FromJson<T>(www.downloadHandler.text);
+                Debug.Log(www.downloadHandler.text);
                 callback(res);
             }
             catch (Exception e)

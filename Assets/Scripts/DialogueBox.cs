@@ -11,12 +11,14 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] private TMP_InputField inputText;
     [SerializeField] private Animator clickImage;
     [SerializeField] private float writeDelay;
+    private AudioSource audioSource;
     private bool firstAnim = true;
     public List<string> inputList = new List<string>();
 
 
-    void Start()
+    void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void WriteDialogue(string talker, string dialogue)
@@ -77,6 +79,8 @@ public class DialogueBox : MonoBehaviour
 
     private IEnumerator Write(string dialogue)
     {
+        audioSource.loop = true;
+        audioSource.Play();
         writing = true;
         if (firstAnim)
             firstAnim = false;
@@ -85,13 +89,11 @@ public class DialogueBox : MonoBehaviour
         foreach (char letter in dialogue)
         {
             dialogueText.text += letter;
-            float delay = writeDelay;
-            if (letter == '\n')
-                delay *= 4;
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(writeDelay);
         }
         writing = false;
         clickImage.SetBool("IsVisible", true);
+        audioSource.loop = false;
     }
 
     public bool CanWrite()

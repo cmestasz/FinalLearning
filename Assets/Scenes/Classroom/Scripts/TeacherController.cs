@@ -17,7 +17,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         {
             if (!classroomManager.classLoaded)
             {
-                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando la clase.\n<<end", true);
+                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy cargando la clase.|||<<end", true);
                 yield break;
             }
             yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueStart, true);
@@ -27,13 +27,13 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         {
             if (blockLeave)
             {
-                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy respondiendo una pregunta.\n<<end", true);
+                yield return DialogueBuilder.WriteDialogue(dialogueBox, $"{characterName}:Espera un momento, estoy respondiendo una pregunta.|||<<end", true);
                 yield break;
             }
             blockLeave = true;
             PlayerController.canMove = false;
             yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueEnd, true);
-            string question = dialogueBox.GetInput(0);
+            string question = dialogueBox.GetInput(0).Trim();
             dialogueBox.ClearInputs();
             yield return FetchAnswer(question);
         }
@@ -45,7 +45,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         {
             string answer = res.answer;
             string dialogue = string.Join(
-                "\n",
+                "|||",
                 new string[] {
                     $"{characterName}:{answer}",
                     "<<end"
@@ -66,7 +66,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
             { "question", question }
         };
 
-        yield return APIManager.PostRequest<Answer>("ask", data, callback, false);
+        yield return APIManager.PostRequest<Answer>("ask", data, callback);
     }
 
     private class Answer
@@ -81,7 +81,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         ChooseNameSprite();
         string topic = GlobalStorage.GetCurrentTopic().name;
         dialogueStart = string.Join(
-            "\n",
+            "|||",
             new string[] {
                 $"{characterName}:Hola! Listo para la clase de {topic}!",
                 "<<click",
@@ -94,7 +94,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         );
 
         dialogueEnd = string.Join(
-            "\n",
+            "|||",
             new string[] {
                 $"{characterName}:Preguntas?",
                 "<<click",
