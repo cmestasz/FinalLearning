@@ -28,8 +28,8 @@ public static class APIManager
         {
             try
             {
-                T res = JsonUtility.FromJson<T>(www.downloadHandler.text);
                 Debug.Log(www.downloadHandler.text);
+                T res = JsonUtility.FromJson<T>(www.downloadHandler.text);
                 callback(res);
             }
             catch (Exception e)

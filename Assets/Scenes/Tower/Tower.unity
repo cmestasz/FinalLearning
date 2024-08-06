@@ -14153,7 +14153,7 @@ MonoBehaviour:
   fireworks: {fileID: 822076582}
   endController: {fileID: 1748567634}
   player: {fileID: 719124455}
-  audioSource: {fileID: 1636156194}
+  musicEval: {fileID: 1636156194}
 --- !u!1 &495432434
 GameObject:
   m_ObjectHideFlags: 0
@@ -20522,12 +20522,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 397f1badfe042af488864d154a5bc055, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a0b6fbbfbf13bb4ca052ed61cad3c2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.4, y: 0.4}
+  m_DrawMode: 1
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -20627,10 +20627,10 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4, y: 0.4}
-    newSize: {x: 0.4, y: 0.4}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
@@ -108095,7 +108095,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 555505538}
-  player: {fileID: 719124455}
   musicAudioSource: {fileID: 175098739}
 --- !u!114 &1748567636
 MonoBehaviour:

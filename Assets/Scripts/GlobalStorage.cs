@@ -11,8 +11,8 @@ public class GlobalStorage : MonoBehaviour
         if (!initialized)
         {
             CourseData = JsonUtility.FromJson<CourseData>(Resources.Load<TextAsset>("CourseData").text);
-            //coursesDone = new bool[CourseData.courses.Count];
-            coursesDone = new bool[] { true, true, false, true, true };
+            coursesDone = new bool[CourseData.courses.Count];
+            //coursesDone = new bool[] { true, true, false, true, true };
             initialized = true;
         }
     }

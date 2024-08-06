@@ -23,11 +23,10 @@ public class EndController : MonoBehaviour
             "<<click",
             "El autor:Sin mucho más que decir,",
             "<<click",
-            "El autor:Hecho con esmero por<br>Luis Sequeiros (@gusCreator)<br>Christian Mestas (@cmestasz)<br>Yenaro Noa (@ynoacamino)<br>Mariel Jara (@Alsnj20)<br>Álvaro Quispe (@ALVARO-QUISPE-UNSA)<br>Jhonatan Arias (@JhonatacDczel)<br>Ricardo Chambilla (@rikich3)<br>Diego Carbajal (@Gocardi)",
+            "El autor:Hecho con esmero por<br>Luis Sequeiros (@gusCreator)<br>Christian Mestas (@cmestasz)<br>Yenaro Noa (@ynoacamino)<br>Mariel Jara (@Alsnj20)<br>Álvaro Quispe (@ALVARO-QUISPE-UNSA)<br>Jhonatan Arias (@JhonatanDczel)<br>Ricardo Chambilla (@rikich3)<br>Diego Carbajal (@Gocardi)",
             "<<end",
         };
         endDialogue = string.Join("|||", dialogue);
-        EndGame();
     }
 
     public void EndGame()
@@ -38,6 +37,7 @@ public class EndController : MonoBehaviour
 
     private IEnumerator EndGameCoroutine()
     {
+        Debug.Log("Ending game");
         PlayerController.canMove = false;
         yield return new WaitForSeconds(3);
         musicAudioSource.Play();
