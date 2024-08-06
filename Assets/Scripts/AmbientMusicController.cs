@@ -12,6 +12,7 @@ public class AmbientMusicController : MonoBehaviour
         {
             instance = gameObject;
             DontDestroyOnLoad(gameObject);
+            GetComponent<AudioController>().FadeIn(1);
         }
         else
         {

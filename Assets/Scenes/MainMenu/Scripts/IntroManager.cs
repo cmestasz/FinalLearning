@@ -5,7 +5,7 @@ public class IntroManager : MonoBehaviour
 {
     private DialogueBox dialogueBox;
     private Animator animator;
-    private AudioSource audioSource;
+    private AudioSource musicFade;
     [SerializeField] private GameObject music;
     private static GameObject musicInstance;
     private string[] dialogues = {
@@ -21,7 +21,7 @@ public class IntroManager : MonoBehaviour
     void Start()
     {
         dialogueBox = GetComponentInChildren<DialogueBox>();
-        audioSource = GetComponent<AudioSource>();
+        musicFade = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         Destroy(GameObject.Find("AmbientMusic"));
 
@@ -46,7 +46,7 @@ public class IntroManager : MonoBehaviour
         {
             if (IsInstance())
             {
-                music.GetComponent<AudioSource>().Play();
+                music.GetComponent<AudioController>().FadeIn(1);
             }
 
             gameObject.SetActive(false);
@@ -64,13 +64,13 @@ public class IntroManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, string.Join("|||", dialogues), true);
 
-        audioSource.Play();
+        musicFade.Play();
         animator.SetTrigger("FadeOut");
 
         yield return new WaitForSeconds(3f);
         if (IsInstance())
         {
-            music.GetComponent<AudioSource>().Play();
+            music.GetComponent<AudioController>().FadeIn(1);
         }
     }
 }

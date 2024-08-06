@@ -1511,6 +1511,8 @@ MonoBehaviour:
   validateClass: 0
   validateQuestion: 0
   validateEvaluator: 0
+  currentMusic: Music
+  endMusic: 1
 --- !u!1 &1081867254
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,6 +2485,8 @@ MonoBehaviour:
   validateClass: 0
   validateQuestion: 0
   validateEvaluator: 0
+  currentMusic: 
+  endMusic: 0
 --- !u!114 &2009049782
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EndController : MonoBehaviour
 {
     [SerializeField] private DialogueBox dialogueBox;
-    [SerializeField] private AudioSource musicAudioSource;
+    [SerializeField] private AudioController musicAudioSource;
     private string endDialogue;
 
     // Start is called before the first frame update
@@ -40,7 +40,7 @@ public class EndController : MonoBehaviour
         Debug.Log("Ending game");
         PlayerController.canMove = false;
         yield return new WaitForSeconds(3);
-        musicAudioSource.Play();
+        musicAudioSource.FadeIn(4);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, endDialogue, true);
         yield return new WaitForSeconds(2);
         Application.Quit();

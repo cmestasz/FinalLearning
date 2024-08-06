@@ -7,11 +7,17 @@ public class SceneChangeButton : MonoBehaviour
     [SerializeField] private bool validateClass;
     [SerializeField] private bool validateQuestion;
     [SerializeField] private bool validateEvaluator;
+    [SerializeField] private string currentMusic;
+    [SerializeField] private bool endMusic;
 
     public void OnClick()
     {
         if (ValidateWarp())
+        {
+            if (endMusic)
+                GameObject.Find(currentMusic).GetComponent<AudioController>().FadeOut(1);
             StartCoroutine(SceneChanger.ChangeScenePlayerless(sceneName));
+        }
     }
 
     private bool ValidateWarp()

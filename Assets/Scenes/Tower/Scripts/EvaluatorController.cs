@@ -8,7 +8,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     [SerializeField] private GameObject fireworks;
     [SerializeField] private EndController endController;
     [SerializeField] private PlayerController player;
-    [SerializeField] private AudioSource musicEval;
+    [SerializeField] private AudioController musicEval;
     private string[] questions;
     private string[] answers;
     private bool[] results;
@@ -39,8 +39,8 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     private IEnumerator PerformTest()
     {
         PlayerController.canMove = false;
-        musicEval.Play();
-        GameObject.Find("AmbientMusic").GetComponent<AudioSource>().Stop();
+        musicEval.FadeIn(2);
+        GameObject.Find("AmbientMusic").GetComponent<AudioController>().FadeOut(2);
 
         List<string> dialogue = new()
             {
@@ -97,7 +97,7 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         {
             if (GlobalStorage.AreAllCoursesDone())
             {
-                musicEval.Stop();
+                musicEval.FadeOut(2);
                 endController.EndGame();
             }
             else

@@ -7,12 +7,16 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public static bool canMove;
     private float moveSpeed;
-    
+    private Animator animator;
+    private Vector3 scale;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = PlayerPrefs.GetInt("speed") * 0.0025f;
+        animator = GetComponent<Animator>();
+        scale = transform.localScale;
         canMove = true;
     }
 
@@ -37,9 +41,24 @@ public class PlayerController : MonoBehaviour
             dir += Vector2.right;
         }
         dir = dir.normalized;
-        if (canMove)
+        if (canMove && dir != Vector2.zero)
+        {
+            if (dir.x < 0)
+            {
+                transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+            }
+            else if (dir.x > 0)
+            {
+                transform.localScale = new Vector3(scale.x, scale.y, scale.z);
+            }
+            animator.SetBool("Moving", true);
             rb.MovePosition((Vector2)transform.position + moveSpeed * dir);
-    
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+        }
+
         if (Input.GetMouseButton(0) && interactable != null)
         {
             StartCoroutine(interactable.Interact());
@@ -57,7 +76,8 @@ public class PlayerController : MonoBehaviour
             {
                 warp.Warp(transform, other.gameObject.transform.position);
             }
-        } else if (other.CompareTag("KeyInteractable"))
+        }
+        else if (other.CompareTag("KeyInteractable"))
         {
             IKeyInteractable interactable = other.GetComponent<IKeyInteractable>();
             if (interactable != null)
