@@ -5,7 +5,6 @@ public class WorldWarp : WarpController
     [SerializeField] private GameObject particles;
     [SerializeField] private EvaluatorController evaluator;
     [SerializeField] private DialogueBox dialogueBox;
-    [SerializeField] private GameObject normalWarp;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +28,6 @@ public class WorldWarp : WarpController
 
         particles.transform.position = transform.position;
         particles.SetActive(true);
-        normalWarp.SetActive(true);
-        normalWarp.transform.position = transform.position;
         return true;
     }
 }

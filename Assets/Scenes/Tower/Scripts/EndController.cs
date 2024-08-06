@@ -5,9 +5,8 @@ using UnityEngine;
 public class EndController : MonoBehaviour
 {
     [SerializeField] private DialogueBox dialogueBox;
-    [SerializeField] private PlayerController player;
+    [SerializeField] private AudioSource musicAudioSource;
     private string endDialogue;
-    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +27,6 @@ public class EndController : MonoBehaviour
             "<<end",
         };
         endDialogue = string.Join("|||", dialogue);
-        audioSource = GetComponent<AudioSource>();
-        Debug.Log(audioSource);
         EndGame();
     }
 
@@ -42,8 +39,8 @@ public class EndController : MonoBehaviour
     private IEnumerator EndGameCoroutine()
     {
         PlayerController.canMove = false;
-        audioSource.Play();
         yield return new WaitForSeconds(3);
+        musicAudioSource.Play();
         yield return DialogueBuilder.WriteDialogue(dialogueBox, endDialogue, true);
         yield return new WaitForSeconds(2);
         Application.Quit();

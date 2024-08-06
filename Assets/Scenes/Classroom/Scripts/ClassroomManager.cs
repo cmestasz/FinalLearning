@@ -40,7 +40,7 @@ public class ClassroomManager : MonoBehaviour
         PlayerController.canMove = false;
         audioSource.Play();
         mainCamera.GetComponent<CameraController>().isFollowingPlayer = false;
-        yield return StartCoroutine(MoveResizeCamera(classCenter, 5));
+        yield return StartCoroutine(MoveResizeCamera(classCenter, 2.5f));
         classContainer.SetActive(true);
         yield return new WaitForSeconds(2);
         NextPage();

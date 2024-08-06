@@ -6,6 +6,8 @@ public class IntroManager : MonoBehaviour
     private DialogueBox dialogueBox;
     private Animator animator;
     private AudioSource audioSource;
+    [SerializeField] private GameObject music;
+    private static GameObject musicInstance;
     private string[] dialogues = {
         "Tú:Desde que tengo memoria, nuestro pueblo vivió en paz bajo la protección de mi maestro. Él vencía con facilidad todos los peligros que nos acechaban. Sin embargo, como predijo, un día fatídico estaba por venir. Cuando me adoptó como su discípulo, me advirtió que mi misión sería derrotarlo, pues un cambio inevitable se avecinaba. Ese oscuro día llegó antes de lo esperado: el mago brujo, con un solo hechizo, venció a mi maestro y poseyó su cuerpo.",
         "<<click",
@@ -21,17 +23,40 @@ public class IntroManager : MonoBehaviour
         dialogueBox = GetComponentInChildren<DialogueBox>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
-        PlayerPrefs.SetInt("Intro", 0);
+        Destroy(GameObject.Find("AmbientMusic"));
+
+        if (musicInstance == null)
+        {
+            musicInstance = music;
+            DontDestroyOnLoad(musicInstance);
+        }
+        else
+        {
+            Destroy(music);
+        }
+
+        // PlayerPrefs.SetInt("Intro", 0);
         if (PlayerPrefs.GetInt("Intro") == 0)
         {
             PlayerPrefs.SetInt("Intro", 1);
             PlayerPrefs.Save();
             StartCoroutine(PlayIntro());
-        } else 
+        }
+        else
         {
+            if (IsInstance())
+            {
+                music.GetComponent<AudioSource>().Play();
+            }
+
             gameObject.SetActive(false);
         }
 
+    }
+
+    private bool IsInstance()
+    {
+        return musicInstance == music;
     }
 
     private IEnumerator PlayIntro()
@@ -41,5 +66,11 @@ public class IntroManager : MonoBehaviour
 
         audioSource.Play();
         animator.SetTrigger("FadeOut");
+
+        yield return new WaitForSeconds(3f);
+        if (IsInstance())
+        {
+            music.GetComponent<AudioSource>().Play();
+        }
     }
 }

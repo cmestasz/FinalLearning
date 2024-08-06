@@ -5,9 +5,10 @@ using UnityEngine;
 public class EvaluatorController : AnyCharacterController, IKeyInteractable
 {
     [SerializeField] private DialogueBox dialogueBox;
-    [SerializeField] private UnityEngine.GameObject fireworks;
+    [SerializeField] private GameObject fireworks;
     [SerializeField] private EndController endController;
     [SerializeField] private PlayerController player;
+    [SerializeField] private AudioSource musicEval;
     private string[] questions;
     private string[] answers;
     private bool[] results;
@@ -38,6 +39,8 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
     private IEnumerator PerformTest()
     {
         PlayerController.canMove = false;
+        musicEval.Play();
+        GameObject.Find("AmbientMusic").GetComponent<AudioSource>().Stop();
 
         List<string> dialogue = new()
             {
@@ -93,9 +96,15 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
         if (hasWon)
         {
             if (GlobalStorage.AreAllCoursesDone())
+            {
+                musicEval.Stop();
                 endController.EndGame();
+            }
             else
+            {
+                GameObject.Find("AmbientMusic").GetComponent<AudioSource>().Play();
                 fireworks.SetActive(true);
+            }
         }
         blockLeave = false;
         PlayerController.canMove = true;

@@ -83,7 +83,7 @@ public class TeacherController : AnyCharacterController, IKeyInteractable
         dialogueStart = string.Join(
             "|||",
             new string[] {
-                $"{characterName}:Hola! Listo para la clase de {topic}!",
+                $"{characterName}:Hola! Listo para la clase de {topic}! (En la mesa de los requerimientos imprecisos...)",
                 "<<click",
                 "SISTEMA:Estas listo para la clase de",
                 "<<timewait 0.25",

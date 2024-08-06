@@ -10,6 +10,7 @@ public class WorldManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Destroy(GameObject.Find("Music"));
         if (TowerData.course != -1)
         {
             Vector2 pos = courseBackWarps[TowerData.course].position;
