@@ -3420,6 +3420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 175098738}
   - component: {fileID: 175098739}
+  - component: {fileID: 175098740}
   m_Layer: 5
   m_Name: EndMusic
   m_TagString: Untagged
@@ -3542,6 +3543,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &175098740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175098737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a013d94d7eaec914c9718dee84e88ee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &205719764
 GameObject:
   m_ObjectHideFlags: 0
@@ -108203,7 +108216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 555505538}
-  musicAudioSource: {fileID: 175098739}
+  musicAudioSource: {fileID: 175098740}
 --- !u!114 &1748567636
 MonoBehaviour:
   m_ObjectHideFlags: 0

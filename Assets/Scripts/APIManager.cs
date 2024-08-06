@@ -8,7 +8,7 @@ public static class APIManager
 {
     private const string BASE_URL = "https://knowledge-wardens.vercel.app/api/ai/";
     private const string TEST_URL = "http://localhost:5000/";
-    private static bool test = true;
+    private static bool test = false;
     public static IEnumerator PostRequest<T>(string url, Dictionary<string, string> data, Action<T> callback)
     {
         WWWForm form = new();

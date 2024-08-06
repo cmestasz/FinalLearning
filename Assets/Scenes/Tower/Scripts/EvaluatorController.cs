@@ -93,16 +93,17 @@ public class EvaluatorController : AnyCharacterController, IKeyInteractable
 
         dialogueString = string.Join("|||", dialogue);
         yield return DialogueBuilder.WriteDialogue(dialogueBox, dialogueString, true);
+
+        musicEval.FadeOut(2);
         if (hasWon)
         {
             if (GlobalStorage.AreAllCoursesDone())
             {
-                musicEval.FadeOut(2);
                 endController.EndGame();
             }
             else
             {
-                GameObject.Find("AmbientMusic").GetComponent<AudioSource>().Play();
+                GameObject.Find("AmbientMusic").GetComponent<AudioController>().FadeIn(2);
                 fireworks.SetActive(true);
             }
         }

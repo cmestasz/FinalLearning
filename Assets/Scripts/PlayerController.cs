@@ -45,11 +45,11 @@ public class PlayerController : MonoBehaviour
         {
             if (dir.x < 0)
             {
-                transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+                GetComponent<SpriteRenderer>().flipX = true;
             }
             else if (dir.x > 0)
             {
-                transform.localScale = new Vector3(scale.x, scale.y, scale.z);
+                GetComponent<SpriteRenderer>().flipX = false;
             }
             animator.SetBool("Moving", true);
             rb.MovePosition((Vector2)transform.position + moveSpeed * dir);
