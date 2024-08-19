@@ -30,9 +30,9 @@ El proyecto se encuentra parcialmente desplegado en la plataforma de Vercel, por
 
 ## Autores
 
-- Christian Mestas (@cmestasz)
-- Ricardo Chambilla (@rikich3)
-- Diego Carbajal (@Gocardi)
+- Christian Mestas
+- Ricardo Chambilla
+- Diego Carbajal
 
 ## Licencia
 
