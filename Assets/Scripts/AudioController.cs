@@ -9,7 +9,7 @@ public class AudioController : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.volume = PlayerPrefs.GetInt("volume") * 0.01f;
+        audioSource.volume = PlayerPrefs.GetInt("volume", 40) * 0.01f;
     }
 
     // Update is called once per frame

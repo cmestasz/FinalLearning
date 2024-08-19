@@ -5,7 +5,7 @@ public class SettingsManager : MonoBehaviour
 {
     public static Vector2Int[] resolutionsList = { new(640, 480), new(1280, 720), new(1366, 768) };
 
-    void Start()
+    void Awake()
     {
         LoadSettings();
     }
@@ -19,14 +19,14 @@ public class SettingsManager : MonoBehaviour
     public void LoadSettings()
     {
         if (!PlayerPrefs.HasKey("resolutionIndex"))
-            PlayerPrefs.SetInt("resolutionIndex", 0);
+            PlayerPrefs.SetInt("resolutionIndex", 1);
         if (!PlayerPrefs.HasKey("volume"))
-            PlayerPrefs.SetInt("volume", 25);
+            PlayerPrefs.SetInt("volume", 40);
         if (!PlayerPrefs.HasKey("speed"))
             PlayerPrefs.SetInt("speed", 50);
         PlayerPrefs.Save();
 
         Vector2Int resolution = GetResolution();
-        Screen.SetResolution((int)resolution.x, (int)resolution.y, false);
+        Screen.SetResolution(resolution.x, resolution.y, false);
     }
 }
